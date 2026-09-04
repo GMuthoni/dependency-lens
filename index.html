@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Dependency Lens</title>
+
+<style>
+  :root {
+    --bg: #f6f6f2;
+    --panel: #ffffff;
+    --text: #171717;
+    --muted: #6d6d67;
+    --line: #ddddD6;
+    --soft: #eeeeE8;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family:
+      Inter,
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      sans-serif;
+    line-height: 1.5;
+  }
+
+  .wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 58px 24px 100px;
+  }
+
+  header {
+    max-width: 780px;
+    margin-bottom: 46px;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+
+  h1 {
+    font-size: clamp(38px, 6vw, 66px);
+    line-height: .96;
+    letter-spacing: -.05em;
+    margin: 0 0 20px;
+  }
+
+  .subtitle {
+    font-size: 20px;
+    line-height: 1.45;
+    color: var(--muted);
+    max-width: 720px;
+  }
+
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 18px;
+  }
+
+  .panel h2 {
+    margin: 0 0 7px;
+    font-size: 17px;
+    letter-spacing: -.01em;
+  }
+
+  .intro {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 0 0 22px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+  }
+
+  input,
+  textarea,
+  select {
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: white;
+    padding: 13px 14px;
+    font: inherit;
+    color: var(--text);
+    outline: none;
+  }
+
+  textarea {
+    min-height: 108px;
+    resize: vertical;
+  }
+
+  input:focus,
+  textarea:focus,
+  select:focus {
+    border-color: #888;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .technology {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px;
+    background: #fcfcfa;
+  }
+
+  .technology + .technology {
+    margin-top: 12px;
+  }
+
+  .technology-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+
+  .number {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .1em;
+    color: var(--muted);
+  }
+
+  button {
+    border: 0;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font: inherit;
+    font-weight: 750;
+    cursor: pointer;
+  }
+
+  .primary {
+    background: #171717;
+    color: white;
+  }
+
+  .secondary {
+    background: var(--soft);
+    color: var(--text);
+  }
+
+  .remove {
+    border: 0;
+    background: transparent;
+    padding: 0;
+    color: var(--muted);
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  .actions {
+    display: flex;
+    gap: 9px;
+    flex-wrap: wrap;
+    margin-top: 18px;
+  }
+
+  .method {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin-top: 22px;
+  }
+
+  .method-step {
+    border-top: 2px solid #171717;
+    padding-top: 9px;
+  }
+
+  .method-step strong {
+    display: block;
+    font-size: 12px;
+  }
+
+  .method-step span {
+    display: block;
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 4px;
+  }
+
+  #results {
+    display: none;
+  }
+
+  .result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 18px;
+    margin-bottom: 20px;
+  }
+
+  .result-header h2 {
+    font-size: 28px;
+    letter-spacing: -.03em;
+    line-height: 1.1;
+    margin: 0 0 8px;
+  }
+
+  .tag {
+    flex: none;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 5px 9px;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+  }
+
+  .stage {
+    border-top: 1px solid var(--line);
+    padding: 25px 0;
+  }
+
+  .stage:first-of-type {
+    border-top: 0;
+  }
+
+  .stage-number {
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .stage h3 {
+    margin: 0 0 8px;
+    font-size: 19px;
+    letter-spacing: -.015em;
+  }
+
+  .stage p {
+    margin: 0;
+  }
+
+  .case-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .case {
+    border: 1px solid var(--line);
+    background: #fafaf7;
+    border-radius: 10px;
+    padding: 15px;
+  }
+
+  .case strong {
+    display: block;
+    font-size: 13px;
+    margin-bottom: 5px;
+  }
+
+  .case p {
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .candidate-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .candidate {
+    border: 1px solid var(--line);
+    border-radius: 11px;
+    padding: 17px;
+    background: #fff;
+    cursor: pointer;
+    transition: border-color .15s ease, transform .15s ease;
+  }
+
+  .candidate:hover {
+    border-color: #999;
+    transform: translateY(-1px);
+  }
+
+  .candidate.selected {
+    border: 2px solid #171717;
+    padding: 16px;
+  }
+
+  .candidate-letter {
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .1em;
+    margin-bottom: 9px;
+  }
+
+  .candidate strong {
+    display: block;
+    font-size: 15px;
+    line-height: 1.25;
+    margin-bottom: 7px;
+  }
+
+  .candidate p {
+    color: var(--muted);
+    font-size: 12px;
+    margin: 0;
+  }
+
+  .hypothesis {
+    border-left: 3px solid #171717;
+    background: #fafaf7;
+    padding: 17px 18px;
+    margin-top: 14px;
+  }
+
+  .hypothesis strong {
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .hypothesis-note {
+    margin-top: 14px;
+    padding-top: 13px;
+    border-top: 1px solid var(--line);
+    color: var(--text);
+    font-size: 13px;
+  }
+
+  .hypothesis-note strong {
+    margin-bottom: 4px;
+  }
+
+  .hypothesis-note em {
+    color: var(--muted);
+  }
+
+  .reason-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 15px;
+  }
+
+  .reason {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px;
+  }
+
+  .reason strong {
+    display: block;
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .reason p {
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .test-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 15px;
+  }
+
+  .test {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px;
+  }
+
+  .test.support {
+    background: #fafaf7;
+  }
+
+  .test strong {
+    display: block;
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .test p {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .distinction {
+    background: #f2f2ed;
+    border-radius: 10px;
+    padding: 15px 17px;
+    margin-top: 15px;
+    font-size: 13px;
+  }
+
+  .distinction strong {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .footnote {
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 14px;
+  }
+
+  @media (max-width: 760px) {
+    .grid,
+    .case-grid,
+    .candidate-grid,
+    .reason-grid,
+    .test-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .method {
+      grid-template-columns: 1fr;
+    }
+
+    .result-header {
+      flex-direction: column;
+    }
+  }
+</style>
+</head>
+
+
+<body>
+
+<div class="wrap">
+
+<header>
+
+  <div class="eyebrow">
+    Dependency Lens · v0.2
+  </div>
+
+  <h1>
+    The bottleneck may be one level above the technology.
+  </h1>
+
+  <p class="subtitle">
+    Compare apparently different approaches by what they have to accomplish,
+    what they depend on, and what evidence would prove or disprove a
+    shared dependency.
+  </p>
+
+</header>
+
+
+<!-- 1 -->
+
+<section class="panel">
+
+  <h2>1. Define the problem</h2>
+
+  <p class="intro">
+    Start with the outcome everyone is trying to achieve.
+    Do not start with a company or architecture.
+  </p>
+
+  <label for="problem">
+    Shared problem
+  </label>
+
+  <textarea id="problem">Enable reliable, repeatable use of a technology in ordinary real-world conditions.</textarea>
+
+</section>
+
+
+<!-- 2 -->
+
+<section class="panel">
+
+  <h2>2. Add the approaches</h2>
+
+  <p class="intro">
+    These can be technologies, architectures, vendors, clinical approaches,
+    products, or competing solutions.
+  </p>
+
+  <div id="technologies"></div>
+
+  <div class="actions">
+
+    <button
+      class="secondary"
+      onclick="addTechnology()">
+      + Add approach
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- 3 -->
+
+<section class="panel">
+
+  <h2>3. Choose what you want to discover</h2>
+
+  <div class="grid">
+
+    <div>
+
+      <label for="question">
+        Comparison question
+      </label>
+
+      <select id="question">
+
+        <option value="dependency">
+          What must all of them make work?
+        </option>
+
+        <option value="risk">
+          What common dependency could create hidden risk?
+        </option>
+
+        <option value="scale">
+          What dependency could become limiting at scale?
+        </option>
+
+        <option value="implementation">
+          What condition could prevent routine implementation?
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div>
+
+      <label for="evidence">
+        Evidence emphasis
+      </label>
+
+      <select id="evidence">
+
+        <option value="operations">
+          Operational burden
+        </option>
+
+        <option value="performance">
+          Long-term performance
+        </option>
+
+        <option value="workflow">
+          Workflow / implementation
+        </option>
+
+        <option value="economics">
+          Recurring economics
+        </option>
+
+      </select>
+
+    </div>
+
+  </div>
+
+
+  <div class="actions">
+
+    <button
+      class="primary"
+      onclick="runAnalysis()">
+      Compare the dependencies
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- RESULTS -->
+
+<section
+  id="results"
+  class="panel">
+
+  <div class="result-header">
+
+    <div>
+
+      <div class="eyebrow">
+        Cross-case synthesis
+      </div>
+
+      <h2>
+        Different approaches may share a condition for success.
+      </h2>
+
+      <p
+        id="resultIntro"
+        class="intro">
+      </p>
+
+    </div>
+
+    <span class="tag">
+      Hypothesis
+    </span>
+
+  </div>
+
+
+  <!-- SURFACE -->
+
+  <div class="stage">
+
+    <div class="stage-number">
+      01 · Surface
+    </div>
+
+    <h3>
+      What appears different
+    </h3>
+
+    <div
+      id="surfaceCases"
+      class="case-grid">
+    </div>
+
+  </div>
+
+
+  <!-- FUNCTION -->
+
+  <div class="stage">
+
+    <div class="stage-number">
+      02 · Function
+    </div>
+
+    <h3>
+      What all of them actually have to accomplish
+    </h3>
+
+    <p id="functionText"></p>
+
+  </div>
+
+
+  <!-- CANDIDATES -->
+
+  <div class="stage">
+
+    <div class="stage-number">
+      03 · Candidate dependencies
+    </div>
+
+    <h3>
+      Several explanations are possible
+    </h3>
+
+    <p>
+      A useful comparison should not jump directly to one “hidden”
+      answer. It should expose competing explanations.
+    </p>
+
+    <div
+      id="candidateGrid"
+      class="candidate-grid">
+    </div>
+
+  </div>
+
+
+  <!-- SELECTED HYPOTHESIS -->
+
+  <div class="stage">
+
+    <div class="stage-number">
+      04 · Working hypothesis
+    </div>
+
+    <h3>
+      What appears most consequential
+    </h3>
+
+    <div class="hypothesis">
+
+      <strong id="dependencyTitle"></strong>
+
+      <p id="dependencyText"></p>
+
+      <div class="hypothesis-note">
+
+        <strong>
+          This is a hypothesis, not a finding.
+        </strong>
+
+        <em>
+          The next useful step is to find the evidence that could distinguish
+          this dependency from the alternatives.
+        </em>
+
+      </div>
+
+    </div>
+
+
+    <div class="reason-grid">
+
+      <div class="reason">
+
+        <strong>
+          Why this candidate?
+        </strong>
+
+        <p id="whyText"></p>
+
+      </div>
+
+
+      <div class="reason">
+
+        <strong>
+          Why it matters
+        </strong>
+
+        <p id="exposureText"></p>
+
+      </div>
+
+    </div>
+
+
+    <div class="distinction">
+
+      <strong>
+        Dependency is not the same thing as bottleneck.
+      </strong>
+
+      A dependency becomes a meaningful bottleneck only if failure,
+      scarcity, maintenance burden, or scaling difficulty at that
+      dependency materially limits the outcome.
+
+    </div>
+
+  </div>
+
+
+  <!-- TEST -->
+
+  <div class="stage">
+
+    <div class="stage-number">
+      05 · Test
+    </div>
+
+    <h3>
+      What evidence would change the conclusion?
+    </h3>
+
+    <div class="test-grid">
+
+      <div class="test support">
+
+        <strong>
+          Supporting evidence
+        </strong>
+
+        <p id="supportingEvidence"></p>
+
+      </div>
+
+
+      <div class="test">
+
+        <strong>
+          Falsifier
+        </strong>
+
+        <p id="falsifier"></p>
+
+      </div>
+
+    </div>
+
+    <p class="footnote">
+      The output is a hypothesis to investigate, not a factual conclusion.
+      The useful result is the next discriminating piece of evidence.
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- METHOD -->
+
+<section class="panel">
+
+  <h2>
+    The comparison sequence
+  </h2>
+
+  <p class="intro">
+    The method deliberately moves one level away from feature comparison.
+  </p>
+
+
+  <div class="method">
+
+    <div class="method-step">
+
+      <strong>
+        Surface
+      </strong>
+
+      <span>
+        What makes them look different?
+      </span>
+
+    </div>
+
+
+    <div class="method-step">
+
+      <strong>
+        Function
+      </strong>
+
+      <span>
+        What must each accomplish?
+      </span>
+
+    </div>
+
+
+    <div class="method-step">
+
+      <strong>
+        Dependency
+      </strong>
+
+      <span>
+        What must remain true?
+      </span>
+
+    </div>
+
+
+    <div class="method-step">
+
+      <strong>
+        Exposure
+      </strong>
+
+      <span>
+        Why does convergence matter?
+      </span>
+
+    </div>
+
+
+    <div class="method-step">
+
+      <strong>
+        Test
+      </strong>
+
+      <span>
+        What would falsify it?
+      </span>
+
+    </div>
+
+  </div>
+
+</section>
+
+</div>
+
+
+<script>
+
+/* ============================================================
+   DATA
+   ============================================================ */
+
+const technologies = [
+
+  {
+    name: "Approach A",
+    description: "Describe what makes this approach technically different."
+  },
+
+  {
+    name: "Approach B",
+    description: "Describe what makes this approach technically different."
+  },
+
+  {
+    name: "Approach C",
+    description: "Describe what makes this approach technically different."
+  }
+
+];
+
+
+let selectedCandidate = 1;
+
+
+/* ============================================================
+   RENDER INPUTS
+   ============================================================ */
+
+function renderTechnologies() {
+
+  const container =
+    document.getElementById("technologies");
+
+  container.innerHTML = "";
+
+  technologies.forEach((tech, index) => {
+
+    const div =
+      document.createElement("div");
+
+    div.className = "technology";
+
+    div.innerHTML = `
+
+      <div class="technology-top">
+
+        <div class="number">
+          APPROACH ${index + 1}
+        </div>
+
+        ${
+          technologies.length > 2
+          ? `
+            <button
+              class="remove"
+              onclick="removeTechnology(${index})">
+              Remove
+            </button>
+          `
+          : ""
+        }
+
+      </div>
+
+
+      <div class="grid">
+
+        <div>
+
+          <label>
+            Name
+          </label>
+
+          <input
+            value="${escapeHtml(tech.name)}"
+            onchange="
+              updateTechnology(
+                ${index},
+                'name',
+                this.value
+              )
+            "
+          />
+
+        </div>
+
+
+        <div>
+
+          <label>
+            What makes it different?
+          </label>
+
+          <input
+            value="${escapeHtml(tech.description)}"
+            onchange="
+              updateTechnology(
+                ${index},
+                'description',
+                this.value
+              )
+            "
+          />
+
+        </div>
+
+      </div>
+
+    `;
+
+    container.appendChild(div);
+
+  });
+
+}
+
+
+function escapeHtml(value) {
+
+  return String(value)
+
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
+}
+
+
+function updateTechnology(
+  index,
+  field,
+  value
+) {
+
+  technologies[index][field] =
+    value;
+
+}
+
+
+function addTechnology() {
+
+  technologies.push({
+
+    name:
+      `Approach ${String.fromCharCode(
+        65 + technologies.length
+      )}`,
+
+    description:
+      "Describe the architectural or technical difference."
+
+  });
+
+  renderTechnologies();
+
+}
+
+
+function removeTechnology(index) {
+
+  technologies.splice(index, 1);
+
+  renderTechnologies();
+
+}
+
+
+/* ============================================================
+   ANALYSIS ENGINE
+   ============================================================ */
+
+function buildCandidates(problem) {
+
+  const lower =
+    problem.toLowerCase();
+
+
+  /*
+   These are deliberately broad hypotheses.
+   They are not claims about the technologies.
+  */
+
+  if (
+    lower.includes("clinical") ||
+    lower.includes("patient") ||
+    lower.includes("medical") ||
+    lower.includes("health")
+  ) {
+
+    return [
+
+      {
+        title:
+          "Technical performance",
+
+        text:
+          "The approaches may differ in mechanism but still depend on achieving sufficient technical performance under real operating conditions.",
+
+        why:
+          "This is the most direct shared requirement, but it may be too close to the surface to explain differences in real-world adoption.",
+
+        exposure:
+          "If performance is adequate but implementation still fails, this dependency is unlikely to be the limiting condition."
+      },
+
+      {
+        title:
+          "Long-term state maintenance",
+
+        text:
+          "The approaches may all depend on preserving useful performance as biological, behavioral, device, or environmental conditions change.",
+
+        why:
+          "This crosses architectural boundaries and introduces a time dimension that ordinary feature comparisons often omit.",
+
+        exposure:
+          "If maintaining performance requires recurring specialist intervention, a shared maintenance burden could become a meaningful constraint."
+      },
+
+      {
+        title:
+          "Workflow integration",
+
+        text:
+          "Different technologies may nevertheless require compatible clinical workflows, staffing, training, and handoffs.",
+
+        why:
+          "A technically successful technology can still fail to become routine if its surrounding workflow is unsustainable.",
+
+        exposure:
+          "A shared workflow requirement could make apparently different technologies compete for the same scarce operational capability."
+      }
+
+    ];
+
+  }
+
+
+  if (
+    lower.includes("robot") ||
+    lower.includes("warehouse") ||
+    lower.includes("manufactur") ||
+    lower.includes("factory")
+  ) {
+
+    return [
+
+      {
+        title:
+          "Core task performance",
+
+        text:
+          "Different systems may depend on achieving adequate performance on the central task.",
+
+        why:
+          "This is necessary but usually not discriminating enough by itself.",
+
+        exposure:
+          "If all systems achieve acceptable task performance, another dependency may explain the practical difference."
+      },
+
+      {
+        title:
+          "Exception handling",
+
+        text:
+          "Different automation architectures may all depend on reliably detecting and recovering from situations outside the nominal operating case.",
+
+        why:
+          "Real-world environments generate exceptions that may be more consequential than nominal performance.",
+
+        exposure:
+          "If exceptions require humans to intervene frequently, the human exception loop can become the practical constraint on deployment."
+      },
+
+      {
+        title:
+          "Integration with existing operations",
+
+        text:
+          "Different systems may depend on fitting into existing physical processes, software, staffing, and throughput requirements.",
+
+        why:
+          "This dependency sits above the individual machine or algorithm.",
+
+        exposure:
+          "If integration work scales with deployment, apparent technical differences may matter less than operational compatibility."
+      }
+
+    ];
+
+  }
+
+
+  return [
+
+    {
+      title:
+        "Core technical performance",
+
+      text:
+        "The approaches may be different in mechanism but still depend on achieving sufficient performance for the intended outcome.",
+
+      why:
+        "This is the most obvious shared requirement and therefore provides a useful baseline hypothesis.",
+
+      exposure:
+        "If all approaches already satisfy the technical threshold, the meaningful constraint likely sits elsewhere."
+    },
+
+    {
+      title:
+        "State maintenance over time",
+
+      text:
+        "The approaches may all depend on detecting and responding to changes in operating conditions while preserving useful performance.",
+
+      why:
+        "This moves beyond the initial capability and asks what must remain true after deployment.",
+
+      exposure:
+        "Recurring monitoring, recalibration, maintenance, or specialist intervention could turn this dependency into a material constraint."
+    },
+
+    {
+      title:
+        "Implementation burden",
+
+      text:
+        "Different technical solutions may nevertheless depend on a sustainable surrounding process involving people, infrastructure, training, maintenance, or workflow.",
+
+      why:
+        "This tests whether the apparent technical choice is masking a common implementation requirement.",
+
+      exposure:
+        "If the same scarce operational capability is required by all approaches, diversification may be lower than the technical comparison suggests."
+    }
+
+  ];
+
+}
+
+
+/* ============================================================
+   TEST GENERATOR
+   ============================================================ */
+
+function buildTest(candidate, evidenceType) {
+
+  let supporting = "";
+  let falsifier = "";
+
+
+  if (candidate.title === "State maintenance over time") {
+
+    if (evidenceType === "performance") {
+
+      supporting =
+        "Measure target performance over time and after meaningful changes in operating conditions. Look for recurring degradation followed by recalibration or compensation.";
+
+      falsifier =
+        "The hypothesis weakens if one approach maintains target performance for long periods despite expected state changes, without meaningful recalibration or intervention.";
+
+    }
+
+    else if (evidenceType === "workflow") {
+
+      supporting =
+        "Measure the frequency of recalibration, troubleshooting, retraining, and specialist intervention required during ordinary use.";
+
+      falsifier =
+        "The hypothesis weakens if one approach reaches routine use without the intervention burden predicted by the shared-dependency hypothesis.";
+
+    }
+
+    else if (evidenceType === "economics") {
+
+      supporting =
+        "Measure recurring labor, service, maintenance, calibration, and support costs required to preserve target performance.";
+
+      falsifier =
+        "The hypothesis weakens if recurring maintenance economics remain low despite the operating changes expected to create the burden.";
+
+    }
+
+    else {
+
+      supporting =
+        "Measure how often users or operators require specialist intervention to restore target performance during ordinary operation.";
+
+      falsifier =
+        "The hypothesis weakens if target performance remains stable with little or no recurring intervention.";
+    }
+
+  }
+
+
+  else if (candidate.title === "Exception handling") {
+
+    supporting =
+      "Measure the frequency of non-nominal cases and the human intervention required to recover from them.";
+
+    falsifier =
+      "The hypothesis weakens if deployment reaches useful scale while exception frequency and human intervention remain low.";
+
+  }
+
+
+  else if (candidate.title === "Workflow integration") {
+
+    supporting =
+      "Measure training, staffing, workflow exceptions, handoffs, and additional operational steps introduced by each approach.";
+
+    falsifier =
+      "The hypothesis weakens if one approach integrates into ordinary workflow without the predicted additional burden.";
+
+  }
+
+
+  else if (candidate.title === "Implementation burden") {
+
+    supporting =
+      "Measure recurring implementation, support, maintenance, staffing, infrastructure, and training requirements across approaches.";
+
+    falsifier =
+      "The hypothesis weakens if one approach achieves sustained real-world use without the shared burden.";
+
+  }
+
+
+  else {
+
+    supporting =
+      "Measure performance against the actual real-world outcome rather than laboratory or component-level performance alone.";
+
+    falsifier =
+      "The hypothesis weakens if the approaches show adequate real-world performance and another dependency better explains observed differences.";
+
+  }
+
+
+  return {
+    supporting,
+    falsifier
+  };
+
+}
+
+
+/* ============================================================
+   RUN ANALYSIS
+   ============================================================ */
+
+function runAnalysis() {
+
+  const problem =
+    document.getElementById("problem")
+      .value
+      .trim();
+
+
+  const evidenceType =
+    document.getElementById("evidence")
+      .value;
+
+
+  const candidates =
+    buildCandidates(problem);
+
+
+  selectedCandidate =
+    Math.min(
+      selectedCandidate,
+      candidates.length - 1
+    );
+
+
+  document.getElementById("results")
+    .style.display = "block";
+
+
+  document.getElementById("resultIntro")
+    .textContent =
+      `The comparison is anchored to one shared problem: "${problem}"`;
+
+
+  /* ----------------------------------------------------------
+     SURFACE
+     ---------------------------------------------------------- */
+
+  const surface =
+    document.getElementById("surfaceCases");
+
+  surface.innerHTML = "";
+
+
+  technologies.forEach(tech => {
+
+    const div =
+      document.createElement("div");
+
+    div.className = "case";
+
+    div.innerHTML = `
+
+      <strong>
+        ${escapeHtml(tech.name)}
+      </strong>
+
+      <p>
+        ${escapeHtml(tech.description)}
+      </p>
+
+    `;
+
+    surface.appendChild(div);
+
+  });
+
+
+  /* ----------------------------------------------------------
+     FUNCTION
+     ---------------------------------------------------------- */
+
+  document.getElementById("functionText")
+    .textContent =
+      `Regardless of architecture, each approach must produce the intended real-world outcome under the conditions in which it will actually be used. That means identifying not just what the technology can do, but what must remain true for it to keep doing it.`;
+
+
+
+  /* ----------------------------------------------------------
+     CANDIDATES
+     ---------------------------------------------------------- */
+
+  const candidateGrid =
+    document.getElementById("candidateGrid");
+
+  candidateGrid.innerHTML = "";
+
+
+  candidates.forEach(
+    (candidate, index) => {
+
+      const div =
+        document.createElement("div");
+
+      div.className =
+        "candidate" +
+        (
+          index === selectedCandidate
+          ? " selected"
+          : ""
+        );
+
+
+      div.innerHTML = `
+
+        <div class="candidate-letter">
+          CANDIDATE ${String.fromCharCode(65 + index)}
+        </div>
+
+        <strong>
+          ${escapeHtml(candidate.title)}
+        </strong>
+
+        <p>
+          ${escapeHtml(candidate.text)}
+        </p>
+
+      `;
+
+
+      div.onclick = () => {
+
+        selectedCandidate =
+          index;
+
+        renderSelectedCandidate(
+          candidates,
+          evidenceType
+        );
+
+        document
+          .querySelectorAll(".candidate")
+          .forEach((el, i) => {
+
+            el.classList.toggle(
+              "selected",
+              i === selectedCandidate
+            );
+
+          });
+
+      };
+
+
+      candidateGrid.appendChild(div);
+
+    }
+  );
+
+
+  renderSelectedCandidate(
+    candidates,
+    evidenceType
+  );
+
+
+  window.scrollTo({
+
+    top:
+      document.getElementById("results")
+        .offsetTop - 20,
+
+    behavior: "smooth"
+
+  });
+
+}
+
+
+/* ============================================================
+   RENDER SELECTED HYPOTHESIS
+   ============================================================ */
+
+function renderSelectedCandidate(
+  candidates,
+  evidenceType
+) {
+
+  const candidate =
+    candidates[selectedCandidate];
+
+
+  document.getElementById(
+    "dependencyTitle"
+  ).textContent =
+    candidate.title;
+
+
+  document.getElementById(
+    "dependencyText"
+  ).textContent =
+    candidate.text;
+
+
+  document.getElementById(
+    "whyText"
+  ).textContent =
+    candidate.why;
+
+
+  document.getElementById(
+    "exposureText"
+  ).textContent =
+    candidate.exposure;
+
+
+  const test =
+    buildTest(
+      candidate,
+      evidenceType
+    );
+
+
+  document.getElementById(
+    "supportingEvidence"
+  ).textContent =
+    test.supporting;
+
+
+  document.getElementById(
+    "falsifier"
+  ).textContent =
+    test.falsifier;
+
+}
+
+
+/* ============================================================
+   INITIALIZE
+   ============================================================ */
+
+renderTechnologies();
+
+</script>
+
+</body>
+</html>
