@@ -247,3 +247,13 @@ It is to see whether one sharper question can improve how technically different 
 And then:
 
 > **What evidence would prove us wrong?**
+
+## Try the instrument
+
+[Open Dependency Lens](https://GMuthoni.github.io/dependency-lens/)
+
+## Cross-domain tests
+
+- [BCI](evidence/bci.md)
+- [Warehouse automation](evidence/warehouse-automation.md)
+- [Water treatment](evidence/water-treatment.md)
