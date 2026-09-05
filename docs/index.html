@@ -6,10 +6,10 @@
 
 <meta
   name="description"
-  content="Dependency Lens — a comparative instrument for identifying shared operational dependencies across different technologies without confusing dependency with bottleneck."
+  content="Reliance Lens — a comparative instrument for testing whether technically different approaches provide genuine operational independence."
 />
 
-<title>Dependency Lens</title>
+<title>Reliance Lens — Different technologies. Shared reliance.</title>
 
 <style>
   :root {
@@ -20,12 +20,13 @@
     --line: #ddddD6;
     --soft: #eeeeE8;
 
-    --warm: #eee8df;
     --accent: #1e4d45;
     --accent-soft: #edf4f1;
-    --accent-line: #b9d0c8;
+    --accent-line: #bfd3cb;
 
-    --max: 1080px;
+    --warm: #efe8de;
+
+    --max: 1120px;
   }
 
   * {
@@ -48,7 +49,7 @@
       BlinkMacSystemFont,
       "Segoe UI",
       sans-serif;
-    line-height: 1.5;
+    line-height: 1.52;
   }
 
   a {
@@ -67,9 +68,8 @@
   }
 
   .wrap {
-    max-width: var(--max);
+    width: min(calc(100% - 40px), var(--max));
     margin: 0 auto;
-    padding: 58px 24px 100px;
   }
 
 
@@ -80,27 +80,24 @@
   nav {
     position: sticky;
     top: 0;
-    z-index: 50;
+    z-index: 100;
     background: rgba(246,246,242,.94);
     backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--line);
   }
 
-  .nav-wrap {
-    max-width: var(--max);
-    min-height: 66px;
-    margin: 0 auto;
-    padding: 0 24px;
+  .nav-inner {
+    min-height: 68px;
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
     gap: 24px;
   }
 
   .brand {
     font-size: 14px;
     font-weight: 800;
-    letter-spacing: -.02em;
+    letter-spacing: -.025em;
     text-decoration: none;
   }
 
@@ -129,9 +126,13 @@
      HERO
      ========================================================== */
 
-  header {
-    max-width: 820px;
-    margin-bottom: 46px;
+  header.hero {
+    padding: 88px 0 76px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .hero-inner {
+    max-width: 930px;
   }
 
   .eyebrow {
@@ -144,56 +145,72 @@
   }
 
   h1 {
-    font-size: clamp(38px, 6vw, 66px);
-    line-height: .96;
-    letter-spacing: -.05em;
-    margin: 0 0 20px;
+    max-width: 920px;
+    margin: 0 0 22px;
+    font-size: clamp(42px, 7vw, 80px);
+    line-height: .94;
+    letter-spacing: -.065em;
   }
 
-  .subtitle {
-    font-size: 20px;
-    line-height: 1.45;
-    color: var(--muted);
-    max-width: 760px;
+  .hero-subtitle {
+    max-width: 800px;
     margin: 0;
+    color: var(--muted);
+    font-size: clamp(18px, 2.2vw, 22px);
+    line-height: 1.45;
   }
 
-  .hero-note {
-    margin-top: 23px;
-    max-width: 780px;
-    padding: 15px 17px;
+  .hero-thesis {
+    max-width: 820px;
+    margin-top: 32px;
+    padding: 20px 21px;
     border-left: 3px solid var(--text);
     background: #fafaf7;
-    font-size: 14px;
-    line-height: 1.5;
+    font-size: 17px;
+    line-height: 1.48;
+  }
+
+  .hero-thesis strong {
+    display: block;
+    margin-bottom: 6px;
   }
 
 
   /* ==========================================================
-     PANELS
+     GENERAL
      ========================================================== */
+
+  .instrument {
+    padding: 60px 0 36px;
+  }
 
   .panel {
     background: var(--panel);
     border: 1px solid var(--line);
     border-radius: 16px;
-    padding: 28px;
+    padding: 29px;
     margin-bottom: 18px;
-    scroll-margin-top: 88px;
+    scroll-margin-top: 90px;
   }
 
   .panel h2 {
     margin: 0 0 7px;
-    font-size: 17px;
-    letter-spacing: -.01em;
+    font-size: 18px;
+    letter-spacing: -.02em;
   }
 
   .intro {
+    margin: 0 0 22px;
+    max-width: 820px;
     color: var(--muted);
     font-size: 14px;
-    margin: 0 0 22px;
-    line-height: 1.5;
+    line-height: 1.52;
   }
+
+
+  /* ==========================================================
+     FORM
+     ========================================================== */
 
   label {
     display: block;
@@ -210,8 +227,8 @@
     width: 100%;
     border: 1px solid var(--line);
     border-radius: 10px;
-    background: white;
     padding: 13px 14px;
+    background: #fff;
     color: var(--text);
     outline: none;
   }
@@ -222,52 +239,60 @@
     border-color: #888;
   }
 
-  textarea {
-    min-height: 108px;
-    resize: vertical;
-    line-height: 1.5;
-  }
-
   input::placeholder,
   textarea::placeholder {
-    color: #aaa9a2;
+    color: #a4a29b;
+  }
+
+  textarea {
+    min-height: 112px;
+    resize: vertical;
+    line-height: 1.52;
   }
 
   .grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 16px;
+  }
+
+  .field-note {
+    margin-top: 7px;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.45;
   }
 
 
   /* ==========================================================
-     TECHNOLOGIES
+     APPROACHES
      ========================================================== */
 
-  #technologies {
+  #approaches {
     display: grid;
-    gap: 12px;
+    gap: 13px;
   }
 
-  .technology {
+  .approach {
     border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 18px;
+    border-radius: 13px;
+    padding: 20px;
     background: #fcfcfa;
   }
 
-  .technology-top {
+  .approach-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
+    gap: 20px;
+    margin-bottom: 16px;
   }
 
   .number {
+    color: var(--muted);
     font-size: 11px;
     font-weight: 800;
     letter-spacing: .1em;
-    color: var(--muted);
   }
 
   .remove {
@@ -276,16 +301,29 @@
     padding: 0;
     color: var(--muted);
     font-size: 12px;
+    font-weight: 600;
   }
 
   .remove:hover {
     color: #743f38;
   }
 
+  .reliance-input {
+    margin-top: 16px;
+  }
+
 
   /* ==========================================================
      BUTTONS
      ========================================================== */
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 9px;
+    margin-top: 18px;
+  }
 
   button {
     border: 0;
@@ -296,7 +334,7 @@
 
   .primary {
     background: var(--text);
-    color: white;
+    color: #fff;
   }
 
   .primary:hover {
@@ -312,33 +350,25 @@
     background: #e6e6df;
   }
 
-  .actions {
-    display: flex;
-    gap: 9px;
-    flex-wrap: wrap;
-    margin-top: 18px;
-    align-items: center;
-  }
-
-  .run-status {
+  .status-line {
     color: var(--muted);
     font-size: 12px;
   }
 
 
   /* ==========================================================
-     METHOD
+     METHOD STRIP
      ========================================================== */
 
-  .method {
+  .method-strip {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 8px;
-    margin-top: 22px;
+    margin-top: 23px;
   }
 
   .method-step {
-    border-top: 2px solid #171717;
+    border-top: 2px solid var(--text);
     padding-top: 9px;
   }
 
@@ -349,9 +379,9 @@
 
   .method-step span {
     display: block;
+    margin-top: 4px;
     color: var(--muted);
     font-size: 11px;
-    margin-top: 4px;
     line-height: 1.4;
   }
 
@@ -368,31 +398,38 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 18px;
-    margin-bottom: 20px;
+    gap: 20px;
+    margin-bottom: 23px;
   }
 
   .result-header h2 {
-    font-size: 28px;
-    letter-spacing: -.03em;
-    line-height: 1.1;
-    margin: 0 0 8px;
+    max-width: 820px;
+    margin: 0 0 9px;
+    font-size: clamp(28px, 4vw, 38px);
+    line-height: 1.07;
+    letter-spacing: -.04em;
+  }
+
+  .result-header p {
+    margin: 0;
+    max-width: 820px;
   }
 
   .tag {
     flex: none;
     border: 1px solid var(--line);
     border-radius: 999px;
-    padding: 5px 9px;
+    padding: 5px 10px;
+    color: var(--muted);
     font-size: 10px;
     font-weight: 800;
-    text-transform: uppercase;
     letter-spacing: .1em;
+    text-transform: uppercase;
   }
 
   .stage {
     border-top: 1px solid var(--line);
-    padding: 25px 0;
+    padding: 27px 0;
   }
 
   .stage:first-of-type {
@@ -400,29 +437,70 @@
   }
 
   .stage-number {
+    margin-bottom: 6px;
     color: var(--muted);
     font-size: 10px;
     font-weight: 800;
     letter-spacing: .11em;
     text-transform: uppercase;
-    margin-bottom: 6px;
   }
 
   .stage h3 {
-    margin: 0 0 8px;
-    font-size: 19px;
-    letter-spacing: -.015em;
+    margin: 0 0 9px;
+    font-size: 20px;
     line-height: 1.2;
+    letter-spacing: -.02em;
   }
 
   .stage > p {
-    margin: 0;
     max-width: 850px;
+    margin: 0;
   }
 
 
   /* ==========================================================
-     SURFACE CASES
+     DIVERSITY SUMMARY
+     ========================================================== */
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .summary-card {
+    border: 1px solid var(--line);
+    border-radius: 11px;
+    padding: 18px;
+    background: #fafaf7;
+  }
+
+  .summary-label {
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+  }
+
+  .summary-card strong {
+    display: block;
+    margin-top: 8px;
+    font-size: 18px;
+    letter-spacing: -.02em;
+  }
+
+  .summary-card p {
+    margin: 6px 0 0;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.48;
+  }
+
+
+  /* ==========================================================
+     SURFACE
      ========================================================== */
 
   .case-grid {
@@ -441,15 +519,47 @@
 
   .case strong {
     display: block;
+    margin-bottom: 6px;
     font-size: 13px;
-    margin-bottom: 5px;
   }
 
   .case p {
-    color: var(--muted);
-    font-size: 13px;
-    line-height: 1.45;
     margin: 0;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+
+  /* ==========================================================
+     RELIANCE MAP
+     ========================================================== */
+
+  .reliance-map {
+    display: grid;
+    gap: 10px;
+    margin-top: 17px;
+  }
+
+  .reliance-row {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 12px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 15px;
+    background: #fff;
+  }
+
+  .reliance-name {
+    font-size: 13px;
+    font-weight: 750;
+  }
+
+  .reliance-detail {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.45;
   }
 
 
@@ -482,9 +592,9 @@
   }
 
   .candidate.selected {
-    border: 2px solid #171717;
+    border: 2px solid var(--text);
     padding: 16px;
-    box-shadow: 0 7px 20px rgba(0,0,0,.035);
+    box-shadow: 0 8px 22px rgba(0,0,0,.04);
   }
 
   .candidate-letter {
@@ -497,16 +607,57 @@
 
   .candidate strong {
     display: block;
+    margin-bottom: 7px;
     font-size: 15px;
     line-height: 1.25;
-    margin-bottom: 7px;
   }
 
   .candidate p {
+    margin: 0;
     color: var(--muted);
     font-size: 12px;
     line-height: 1.5;
+  }
+
+  .candidate-meta {
+    margin-top: 11px;
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.4;
+  }
+
+
+  /* ==========================================================
+     CONVERGENCE
+     ========================================================== */
+
+  .convergence {
+    margin-top: 16px;
+    border-radius: 12px;
+    padding: 20px;
+    background: var(--accent-soft);
+    border: 1px solid var(--accent-line);
+  }
+
+  .convergence-label {
+    color: var(--accent);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+  }
+
+  .convergence h4 {
+    margin: 8px 0 7px;
+    font-size: 21px;
+    letter-spacing: -.025em;
+  }
+
+  .convergence p {
     margin: 0;
+    color: #35524a;
+    font-size: 13px;
+    line-height: 1.52;
   }
 
 
@@ -515,15 +666,15 @@
      ========================================================== */
 
   .hypothesis {
-    border-left: 3px solid #171717;
+    margin-top: 15px;
+    padding: 18px 19px;
+    border-left: 3px solid var(--text);
     background: #fafaf7;
-    padding: 17px 18px;
-    margin-top: 14px;
   }
 
   .hypothesis strong {
     display: block;
-    margin-bottom: 6px;
+    margin-bottom: 7px;
   }
 
   .hypothesis p {
@@ -550,17 +701,17 @@
 
   .reason strong {
     display: block;
+    margin-bottom: 6px;
     font-size: 11px;
     letter-spacing: .08em;
     text-transform: uppercase;
-    margin-bottom: 6px;
   }
 
   .reason p {
+    margin: 0;
     color: var(--muted);
     font-size: 13px;
     line-height: 1.5;
-    margin: 0;
   }
 
 
@@ -587,26 +738,26 @@
 
   .test strong {
     display: block;
+    margin-bottom: 6px;
     font-size: 11px;
     letter-spacing: .08em;
     text-transform: uppercase;
-    margin-bottom: 6px;
   }
 
   .test p {
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.5;
     margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.5;
   }
 
   .distinction {
-    background: #f2f2ed;
-    border-radius: 10px;
-    padding: 15px 17px;
     margin-top: 15px;
+    padding: 15px 17px;
+    border-radius: 10px;
+    background: var(--soft);
     font-size: 13px;
-    line-height: 1.5;
+    line-height: 1.52;
   }
 
   .distinction strong {
@@ -614,15 +765,9 @@
     margin-bottom: 5px;
   }
 
-  .footnote {
-    color: var(--muted);
-    font-size: 11px;
-    margin-top: 14px;
-  }
-
 
   /* ==========================================================
-     GENERAL CONTENT
+     CONTENT
      ========================================================== */
 
   .content-section {
@@ -630,22 +775,22 @@
   }
 
   .section-heading {
-    max-width: 800px;
+    max-width: 820px;
     margin-bottom: 34px;
   }
 
   .section-heading h2 {
-    font-size: clamp(32px, 5vw, 55px);
+    margin: 0 0 17px;
+    font-size: clamp(32px, 5vw, 56px);
     line-height: .98;
     letter-spacing: -.05em;
-    margin: 0 0 17px;
   }
 
   .section-heading p {
+    margin: 0;
     color: var(--muted);
     font-size: 16px;
     line-height: 1.55;
-    margin: 0;
   }
 
 
@@ -654,7 +799,7 @@
      ========================================================== */
 
   .tests-section {
-    background: var(--panel);
+    background: #fff;
     border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
   }
@@ -672,7 +817,7 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 22px;
+    gap: 20px;
     margin-bottom: 32px;
   }
 
@@ -691,18 +836,18 @@
 
   .test-case h2 {
     margin: 0;
-    font-size: clamp(32px, 5vw, 52px);
+    font-size: clamp(32px, 5vw, 53px);
     line-height: .98;
-    letter-spacing: -.05em;
+    letter-spacing: -.055em;
   }
 
   .status {
     white-space: nowrap;
-    border: 1px solid var(--accent-line);
+    padding: 6px 10px;
     color: var(--accent);
     background: var(--accent-soft);
+    border: 1px solid var(--accent-line);
     border-radius: 999px;
-    padding: 6px 10px;
     font-size: 10px;
     font-weight: 800;
     letter-spacing: .1em;
@@ -730,15 +875,15 @@
   }
 
   .label {
+    color: var(--muted);
     font-size: 10px;
     font-weight: 800;
     letter-spacing: .13em;
     text-transform: uppercase;
-    color: var(--muted);
   }
 
   .finding h3 {
-    margin: 11px 0 11px;
+    margin: 11px 0;
     font-size: 23px;
     line-height: 1.12;
     letter-spacing: -.025em;
@@ -760,16 +905,12 @@
     line-height: 1.5;
   }
 
-  .evidence-card strong {
-    color: var(--text);
-  }
-
   .challenge {
     margin-top: 20px;
     padding: 19px;
     border-left: 3px solid #8b5e34;
-    background: var(--warm);
     border-radius: 0 11px 11px 0;
+    background: var(--warm);
   }
 
   .challenge strong {
@@ -797,11 +938,11 @@
 
   .conclusion strong {
     display: block;
+    margin-bottom: 6px;
     color: #b9d4ca;
     font-size: 10px;
     letter-spacing: .12em;
     text-transform: uppercase;
-    margin-bottom: 6px;
   }
 
   .conclusion p {
@@ -818,10 +959,10 @@
   }
 
   .architecture > p {
+    margin: 0;
     color: var(--muted);
     font-size: 13px;
     line-height: 1.5;
-    margin: 0;
   }
 
   .mini-list {
@@ -844,7 +985,7 @@
 
 
   /* ==========================================================
-     EVIDENCE
+     EVIDENCE STANDARD
      ========================================================== */
 
   .evidence-section {
@@ -885,35 +1026,35 @@
      ========================================================== */
 
   .final-section {
-    padding: 95px 0;
+    padding: 98px 0;
   }
 
   .final-box {
-    max-width: 900px;
+    max-width: 930px;
   }
 
   .final-box h2 {
     margin: 0;
-    font-size: clamp(36px, 6vw, 66px);
+    font-size: clamp(38px, 6vw, 69px);
     line-height: .96;
     letter-spacing: -.055em;
   }
 
   .final-box p {
-    max-width: 740px;
-    margin: 25px 0 0;
+    max-width: 760px;
+    margin: 26px 0 0;
     color: var(--muted);
     font-size: 17px;
     line-height: 1.55;
   }
 
   .final-formula {
-    margin-top: 33px;
     display: inline-block;
-    padding: 17px 20px;
-    background: var(--text);
-    color: white;
+    margin-top: 34px;
+    padding: 18px 21px;
     border-radius: 11px;
+    background: var(--text);
+    color: #fff;
     font-size: 16px;
   }
 
@@ -923,8 +1064,8 @@
      ========================================================== */
 
   .sources-section {
-    border-top: 1px solid var(--line);
     padding: 60px 0 75px;
+    border-top: 1px solid var(--line);
   }
 
   .sources-section h2 {
@@ -957,8 +1098,8 @@
   }
 
   .boundary {
+    max-width: 820px;
     margin-top: 28px;
-    max-width: 790px;
     color: var(--muted);
     font-size: 12px;
     line-height: 1.55;
@@ -985,17 +1126,14 @@
      RESPONSIVE
      ========================================================== */
 
-  @media (max-width: 900px) {
+  @media (max-width: 950px) {
 
     .test-grid-wide {
       grid-template-columns: 1fr;
     }
 
+    .summary-grid,
     .standard-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .method {
       grid-template-columns: 1fr;
     }
 
@@ -1005,8 +1143,16 @@
   @media (max-width: 760px) {
 
     .wrap,
-    .nav-wrap {
+    .nav-inner {
       width: 100%;
+    }
+
+    .wrap {
+      padding-left: 18px;
+      padding-right: 18px;
+    }
+
+    .nav-inner {
       padding-left: 18px;
       padding-right: 18px;
     }
@@ -1024,6 +1170,14 @@
       grid-template-columns: 1fr;
     }
 
+    .method-strip {
+      grid-template-columns: 1fr;
+    }
+
+    .reliance-row {
+      grid-template-columns: 1fr;
+    }
+
     .result-header,
     .test-case-header {
       flex-direction: column;
@@ -1033,8 +1187,12 @@
       padding: 22px;
     }
 
+    .instrument {
+      padding-top: 36px;
+    }
+
     .test-case {
-      padding: 52px 0;
+      padding: 53px 0;
     }
 
     .final-section {
@@ -1055,12 +1213,12 @@
 
 <nav>
 
-  <div class="nav-wrap">
+  <div class="nav-inner">
 
     <a
       class="brand"
       href="#top">
-      Dependency Lens
+      Reliance Lens
     </a>
 
     <div class="nav-links">
@@ -1069,7 +1227,7 @@
         Instrument
       </a>
 
-      <a href="#method-detail">
+      <a href="#method">
         Method
       </a>
 
@@ -1088,504 +1246,661 @@
 </nav>
 
 
-<div
-  id="top"
-  class="wrap">
+<main id="top">
 
 
 <!-- ==========================================================
      HERO
      ========================================================== -->
 
-<header>
+<header class="hero">
 
-  <div class="eyebrow">
-    Dependency Lens · v0.3
-  </div>
+  <div class="wrap hero-inner">
 
-  <h1>
-    The bottleneck may be one level above the technology.
-  </h1>
+    <div class="eyebrow">
+      Reliance Lens · comparative instrument
+    </div>
 
-  <p class="subtitle">
-    Compare apparently different approaches by what they have to accomplish,
-    what they depend on, and what evidence would prove or disprove a
-    shared dependency.
-  </p>
+    <h1>
+      Different technologies do not necessarily mean different exposure.
+    </h1>
 
-  <div class="hero-note">
-    For high-consequence systems, the useful comparison is rarely
-    “which architecture is best?” It is often “what must remain true
-    across all of them—and where would failure of that condition
-    become consequential?”
+    <p class="hero-subtitle">
+      Compare technically different approaches by what they actually
+      rely on in operation—and test whether choosing among them creates
+      genuine independence.
+    </p>
+
+    <div class="hero-thesis">
+
+      <strong>
+        The strategic question
+      </strong>
+
+      A portfolio can contain very different technologies while remaining
+      reliant on the same people, infrastructure, resource, process,
+      environmental condition, or recovery capability.
+
+    </div>
+
   </div>
 
 </header>
 
 
 <!-- ==========================================================
-     1. DEFINE PROBLEM
+     INSTRUMENT
      ========================================================== -->
 
 <section
   id="instrument"
-  class="panel">
+  class="instrument">
 
-  <div class="eyebrow">
-    Instrument
-  </div>
-
-  <h2>
-    1. Define the problem
-  </h2>
-
-  <p class="intro">
-    Start with the real-world job shared across the approaches.
-    Describe the consequence you care about rather than choosing
-    from a preset outcome list.
-  </p>
-
-  <label for="problem">
-    Shared problem
-  </label>
-
-  <textarea
-    id="problem"
-    placeholder="What must ultimately work in the real world? Include the operating context, consequence, or system-level requirement."
-  >Enable reliable, repeatable use of a technology in ordinary real-world conditions.</textarea>
-
-</section>
+  <div class="wrap">
 
 
-<!-- ==========================================================
-     2. ADD APPROACHES
-     ========================================================== -->
+    <!-- 1 -->
 
-<section class="panel">
-
-  <h2>
-    2. Add the approaches
-  </h2>
-
-  <p class="intro">
-    These can be technologies, architectures, vendors, clinical approaches,
-    products, processes, or competing solutions. Describe the meaningful
-    technical difference—not why one is better.
-  </p>
-
-  <div id="technologies"></div>
-
-  <div class="actions">
-
-    <button
-      type="button"
-      class="secondary"
-      onclick="addTechnology()">
-      + Add approach
-    </button>
-
-  </div>
-
-</section>
-
-
-<!-- ==========================================================
-     3. DISCOVERY
-     ========================================================== -->
-
-<section class="panel">
-
-  <h2>
-    3. Choose what you want to discover
-  </h2>
-
-  <div class="grid">
-
-    <div>
-
-      <label for="question">
-        Comparison question
-      </label>
-
-      <select id="question">
-
-        <option value="dependency">
-          What must all of them make work?
-        </option>
-
-        <option value="risk">
-          What common dependency could create hidden risk?
-        </option>
-
-        <option value="scale">
-          What dependency could become limiting at scale?
-        </option>
-
-        <option value="implementation">
-          What condition could prevent routine implementation?
-        </option>
-
-      </select>
-
-    </div>
-
-
-    <div>
-
-      <label for="evidence">
-        Evidence emphasis
-      </label>
-
-      <select id="evidence">
-
-        <option value="operations">
-          Operational burden
-        </option>
-
-        <option value="performance">
-          Long-term performance
-        </option>
-
-        <option value="workflow">
-          Workflow / implementation
-        </option>
-
-        <option value="economics">
-          Recurring economics
-        </option>
-
-      </select>
-
-    </div>
-
-  </div>
-
-
-  <div class="actions">
-
-    <button
-      type="button"
-      class="primary"
-      onclick="runAnalysis()">
-      Compare the dependencies
-    </button>
-
-    <span
-      id="runStatus"
-      class="run-status">
-    </span>
-
-  </div>
-
-</section>
-
-
-<!-- ==========================================================
-     RESULTS
-     ========================================================== -->
-
-<section
-  id="results"
-  class="panel">
-
-
-  <div class="result-header">
-
-    <div>
+    <section class="panel">
 
       <div class="eyebrow">
-        Cross-case synthesis
+        Instrument
       </div>
 
       <h2>
-        Different approaches may share a condition for success.
+        1. Define the shared function
       </h2>
 
-      <p
-        id="resultIntro"
-        class="intro">
+      <p class="intro">
+        State what must work in the real world. Describe the mission,
+        service, process, or function the approaches are intended to support.
       </p>
 
-    </div>
+      <label for="problem">
+        Shared function / operating requirement
+      </label>
 
-    <span class="tag">
-      Hypothesis
-    </span>
+      <textarea
+        id="problem"
+        placeholder="What must reliably work in the real world? Include the operating context and what failure would disrupt."
+      >Maintain reliable service under changing operating conditions.</textarea>
 
-  </div>
+      <div class="field-note">
+        Strong inputs describe the real operating requirement rather than
+        naming a preferred technology.
+      </div>
 
-
-  <!-- --------------------------------------------------------
-       SURFACE
-       -------------------------------------------------------- -->
-
-  <div class="stage">
-
-    <div class="stage-number">
-      01 · Surface
-    </div>
-
-    <h3>
-      What appears different
-    </h3>
-
-    <div
-      id="surfaceCases"
-      class="case-grid">
-    </div>
-
-  </div>
+    </section>
 
 
-  <!-- --------------------------------------------------------
-       FUNCTION
-       -------------------------------------------------------- -->
+    <!-- 2 -->
 
-  <div class="stage">
+    <section class="panel">
 
-    <div class="stage-number">
-      02 · Function
-    </div>
+      <h2>
+        2. Add the approaches
+      </h2>
 
-    <h3>
-      What all of them actually have to accomplish
-    </h3>
+      <p class="intro">
+        Describe the meaningful difference between the approaches and,
+        importantly, what each appears to rely on to operate successfully.
+      </p>
 
-    <p id="functionText"></p>
+      <div id="approaches"></div>
 
-  </div>
+      <div class="actions">
 
+        <button
+          type="button"
+          class="secondary"
+          onclick="addApproach()">
+          + Add approach
+        </button>
 
-  <!-- --------------------------------------------------------
-       CANDIDATES
-       -------------------------------------------------------- -->
+      </div>
 
-  <div class="stage">
-
-    <div class="stage-number">
-      03 · Candidate dependencies
-    </div>
-
-    <h3>
-      Several explanations are possible
-    </h3>
-
-    <p>
-      The candidates below are generated from the problem and the
-      differences you entered. They are competing hypotheses, not
-      conclusions.
-    </p>
-
-    <div
-      id="candidateGrid"
-      class="candidate-grid">
-    </div>
-
-  </div>
+    </section>
 
 
-  <!-- --------------------------------------------------------
-       WORKING HYPOTHESIS
-       -------------------------------------------------------- -->
+    <!-- 3 -->
 
-  <div class="stage">
+    <section class="panel">
 
-    <div class="stage-number">
-      04 · Working hypothesis
-    </div>
+      <h2>
+        3. Decide what you are testing
+      </h2>
 
-    <h3>
-      What appears most consequential
-    </h3>
+      <div class="grid">
 
-    <div class="hypothesis">
+        <div>
 
-      <strong id="dependencyTitle"></strong>
+          <label for="question">
+            Analytical question
+          </label>
 
-      <p id="dependencyText"></p>
+          <select id="question">
 
-    </div>
+            <option value="independence">
+              Do these approaches actually provide independence?
+            </option>
+
+            <option value="hidden">
+              Where could hidden shared reliance remain?
+            </option>
+
+            <option value="scale">
+              Where could shared reliance increase with scale?
+            </option>
+
+            <option value="implementation">
+              What shared reliance could undermine adoption?
+            </option>
+
+          </select>
+
+        </div>
 
 
-    <div class="reason-grid">
+        <div>
 
-      <div class="reason">
+          <label for="evidence">
+            Evidence emphasis
+          </label>
 
-        <strong>
-          Why this candidate?
-        </strong>
+          <select id="evidence">
 
-        <p id="whyText"></p>
+            <option value="operations">
+              Operational burden
+            </option>
+
+            <option value="performance">
+              Long-term performance
+            </option>
+
+            <option value="workflow">
+              Workflow / implementation
+            </option>
+
+            <option value="economics">
+              Recurring economics
+            </option>
+
+          </select>
+
+        </div>
 
       </div>
 
 
-      <div class="reason">
+      <div class="actions">
 
-        <strong>
-          Why it matters
-        </strong>
+        <button
+          type="button"
+          class="primary"
+          onclick="runAnalysis()">
+          Test the reliance
+        </button>
 
-        <p id="exposureText"></p>
-
-      </div>
-
-    </div>
-
-
-    <div class="distinction">
-
-      <strong>
-        Dependency is not the same thing as bottleneck.
-      </strong>
-
-      A dependency becomes a meaningful bottleneck only if failure,
-      scarcity, maintenance burden, or scaling difficulty at that
-      dependency materially limits the real-world outcome.
-
-    </div>
-
-  </div>
-
-
-  <!-- --------------------------------------------------------
-       TEST
-       -------------------------------------------------------- -->
-
-  <div class="stage">
-
-    <div class="stage-number">
-      05 · Test
-    </div>
-
-    <h3>
-      What evidence would change the conclusion?
-    </h3>
-
-    <div class="test-grid">
-
-      <div class="test support">
-
-        <strong>
-          Supporting evidence
-        </strong>
-
-        <p id="supportingEvidence"></p>
+        <span
+          id="runStatus"
+          class="status-line">
+        </span>
 
       </div>
 
+    </section>
 
-      <div class="test">
 
-        <strong>
-          Falsifier
-        </strong>
+    <!-- ======================================================
+         METHOD STRIP
+         ====================================================== -->
 
-        <p id="falsifier"></p>
+    <section class="panel">
+
+      <h2>
+        The comparison sequence
+      </h2>
+
+      <p class="intro">
+        The Lens deliberately separates technical difference from
+        operational independence.
+      </p>
+
+      <div class="method-strip">
+
+        <div class="method-step">
+
+          <strong>
+            Approach
+          </strong>
+
+          <span>
+            What makes the systems different?
+          </span>
+
+        </div>
+
+
+        <div class="method-step">
+
+          <strong>
+            Function
+          </strong>
+
+          <span>
+            What must they all accomplish?
+          </span>
+
+        </div>
+
+
+        <div class="method-step">
+
+          <strong>
+            Reliance
+          </strong>
+
+          <span>
+            What does each require?
+          </span>
+
+        </div>
+
+
+        <div class="method-step">
+
+          <strong>
+            Coupling
+          </strong>
+
+          <span>
+            Where do those requirements converge?
+          </span>
+
+        </div>
+
+
+        <div class="method-step">
+
+          <strong>
+            Independence
+          </strong>
+
+          <span>
+            Does choosing differently reduce exposure?
+          </span>
+
+        </div>
 
       </div>
 
-    </div>
+    </section>
 
-    <p class="footnote">
-      The output is a hypothesis to investigate, not a factual conclusion.
-      The useful result is the next discriminating piece of evidence.
-    </p>
+
+    <!-- ======================================================
+         RESULTS
+         ====================================================== -->
+
+    <section
+      id="results"
+      class="panel">
+
+
+      <div class="result-header">
+
+        <div>
+
+          <div class="eyebrow">
+            Cross-case synthesis
+          </div>
+
+          <h2>
+            Technical diversity is only useful if reliance also separates.
+          </h2>
+
+          <p
+            id="resultIntro"
+            class="intro">
+          </p>
+
+        </div>
+
+        <span class="tag">
+          Analytical reading
+        </span>
+
+      </div>
+
+
+      <!-- DIVERSITY -->
+
+      <div class="stage">
+
+        <div class="stage-number">
+          01 · Diversity
+        </div>
+
+        <h3>
+          What kind of diversity is actually present?
+        </h3>
+
+        <div
+          id="summaryGrid"
+          class="summary-grid">
+        </div>
+
+      </div>
+
+
+      <!-- SURFACE -->
+
+      <div class="stage">
+
+        <div class="stage-number">
+          02 · Approach
+        </div>
+
+        <h3>
+          What appears different
+        </h3>
+
+        <div
+          id="surfaceCases"
+          class="case-grid">
+        </div>
+
+      </div>
+
+
+      <!-- FUNCTION -->
+
+      <div class="stage">
+
+        <div class="stage-number">
+          03 · Function
+        </div>
+
+        <h3>
+          What they still have to accomplish
+        </h3>
+
+        <p id="functionText"></p>
+
+      </div>
+
+
+      <!-- RELIANCE MAP -->
+
+      <div class="stage">
+
+        <div class="stage-number">
+          04 · Reliance map
+        </div>
+
+        <h3>
+          What each approach depends on
+        </h3>
+
+        <p>
+          The explicit reliance statements are preserved rather than
+          collapsed into a single generic answer.
+        </p>
+
+        <div
+          id="relianceMap"
+          class="reliance-map">
+        </div>
+
+      </div>
+
+
+      <!-- CANDIDATES -->
+
+      <div class="stage">
+
+        <div class="stage-number">
+          05 · Shared reliance candidates
+        </div>
+
+        <h3>
+          Where the approaches may converge
+        </h3>
+
+        <p>
+          These are competing explanations for why apparently different
+          approaches may remain operationally coupled.
+        </p>
+
+        <div
+          id="candidateGrid"
+          class="candidate-grid">
+        </div>
+
+      </div>
+
+
+      <!-- CONVERGENCE -->
+
+      <div class="stage">
+
+        <div class="stage-number">
+          06 · Reliance concentration
+        </div>
+
+        <h3>
+          Does choosing differently reduce exposure?
+        </h3>
+
+        <div
+          id="convergence"
+          class="convergence">
+        </div>
+
+      </div>
+
+
+      <!-- HYPOTHESIS -->
+
+      <div class="stage">
+
+        <div class="stage-number">
+          07 · Working hypothesis
+        </div>
+
+        <h3>
+          What should the decision-maker challenge?
+        </h3>
+
+        <div class="hypothesis">
+
+          <strong id="dependencyTitle"></strong>
+
+          <p id="dependencyText"></p>
+
+        </div>
+
+
+        <div class="reason-grid">
+
+          <div class="reason">
+
+            <strong>
+              Why this candidate?
+            </strong>
+
+            <p id="whyText"></p>
+
+          </div>
+
+
+          <div class="reason">
+
+            <strong>
+              Strategic implication
+            </strong>
+
+            <p id="implicationText"></p>
+
+          </div>
+
+        </div>
+
+
+        <div class="distinction">
+
+          <strong>
+            Shared reliance is not automatically shared exposure.
+          </strong>
+
+          The important question is whether the approaches rely on the same
+          underlying capability, whether that capability can become
+          constrained or disrupted, and whether their exposure is actually
+          similar enough to reduce the independence gained by technical
+          diversification.
+
+        </div>
+
+      </div>
+
+
+      <!-- TEST -->
+
+      <div class="stage">
+
+        <div class="stage-number">
+          08 · Independence test
+        </div>
+
+        <h3>
+          What evidence would change the conclusion?
+        </h3>
+
+        <div class="test-grid">
+
+          <div class="test support">
+
+            <strong>
+              Supporting evidence
+            </strong>
+
+            <p id="supportingEvidence"></p>
+
+          </div>
+
+
+          <div class="test">
+
+            <strong>
+              Falsifier
+            </strong>
+
+            <p id="falsifier"></p>
+
+          </div>
+
+        </div>
+
+        <p class="footnote">
+          The output is a structured hypothesis about operational reliance.
+          It does not establish causality or independence on its own.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- METHOD -->
+
+    <section
+      id="method"
+      class="panel">
+
+      <h2>
+        Method
+      </h2>
+
+      <p class="intro">
+        Reliance Lens compares technologies at the narrowest level that
+        remains operationally meaningful: high enough to cross architectures,
+        but concrete enough to distinguish genuine independence from
+        superficial difference.
+      </p>
+
+
+      <div class="method-strip">
+
+        <div class="method-step">
+
+          <strong>
+            Approach
+          </strong>
+
+          <span>
+            Technical difference.
+          </span>
+
+        </div>
+
+
+        <div class="method-step">
+
+          <strong>
+            Function
+          </strong>
+
+          <span>
+            Common real-world job.
+          </span>
+
+        </div>
+
+
+        <div class="method-step">
+
+          <strong>
+            Reliance
+          </strong>
+
+          <span>
+            What each approach requires.
+          </span>
+
+        </div>
+
+
+        <div class="method-step">
+
+          <strong>
+            Coupling
+          </strong>
+
+          <span>
+            Where reliance converges.
+          </span>
+
+        </div>
+
+
+        <div class="method-step">
+
+          <strong>
+            Independence
+          </strong>
+
+          <span>
+            Whether exposure actually separates.
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
 
   </div>
 
 </section>
-
-
-<!-- ==========================================================
-     METHOD
-     ========================================================== -->
-
-<section
-  id="method-detail"
-  class="panel">
-
-  <h2>
-    The comparison sequence
-  </h2>
-
-  <p class="intro">
-    The method deliberately moves one level away from feature comparison.
-  </p>
-
-
-  <div class="method">
-
-    <div class="method-step">
-
-      <strong>
-        Surface
-      </strong>
-
-      <span>
-        What makes them look different?
-      </span>
-
-    </div>
-
-
-    <div class="method-step">
-
-      <strong>
-        Function
-      </strong>
-
-      <span>
-        What must each accomplish?
-      </span>
-
-    </div>
-
-
-    <div class="method-step">
-
-      <strong>
-        Dependency
-      </strong>
-
-      <span>
-        What must remain true?
-      </span>
-
-    </div>
-
-
-    <div class="method-step">
-
-      <strong>
-        Exposure
-      </strong>
-
-      <span>
-        Why does convergence matter?
-      </span>
-
-    </div>
-
-
-    <div class="method-step">
-
-      <strong>
-        Test
-      </strong>
-
-      <span>
-        What would falsify it?
-      </span>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-</div>
 
 
 <!-- ==========================================================
@@ -1609,9 +1924,8 @@
       </h2>
 
       <p>
-        These examples test whether the same analytical operation remains
-        useful when technologies, risks, and operating environments change
-        radically.
+        The framework should remain useful when mechanisms, operating
+        environments, and failure modes change radically.
       </p>
 
     </div>
@@ -1636,15 +1950,15 @@
         </div>
 
         <span class="status">
-          Pass · preliminary
+          Preliminary
         </span>
 
       </div>
 
 
       <div class="test-question">
-        Does the Lens reveal a dependency that conventional
-        architecture-level comparison misses?
+        Can different neural-interface architectures still remain reliant
+        on the same underlying conditions for sustained useful control?
       </div>
 
 
@@ -1659,22 +1973,26 @@
             </div>
 
             <h3>
-              Long-term state maintenance
+              Longitudinal usability may matter more than interface type
             </h3>
 
             <p>
-              Endovascular, high-channel-count cortical, and alternative
-              cortical interfaces differ substantially in how they access
-              neural signals. Yet each ultimately has to maintain a
-              usable relationship between neural activity, decoded intent,
-              and system action.
+              Endovascular, high-density cortical, and other neural
+              interfaces differ substantially in how they acquire signals.
+              The higher-level comparison asks whether useful control can
+              remain stable as biological, behavioral, decoder, and device
+              conditions change.
             </p>
 
             <div class="evidence-card">
-              <strong>Candidate dependency:</strong><br />
-              Maintaining a usable neural-to-action control loop as
-              biological, behavioral, decoder, and device conditions
-              change.
+
+              <strong>
+                Candidate shared reliance:
+              </strong>
+
+              Maintaining a usable neural-to-action control loop over time
+              without recurring intervention becoming unsustainable.
+
             </div>
 
           </div>
@@ -1687,10 +2005,9 @@
             </strong>
 
             <p>
-              Recalibration or adaptation alone does not establish a
-              bottleneck. The decisive question is whether the intervention
-              required to preserve useful control becomes a recurring
-              operational constraint.
+              Similar maintenance requirements do not prove similar
+              exposure. The approaches may differ materially in who or what
+              provides the required recovery capability.
             </p>
 
           </div>
@@ -1699,15 +2016,13 @@
           <div class="conclusion">
 
             <strong>
-              Conclusion
+              Implication
             </strong>
 
             <p>
-              Different BCI architectures may share a dependency that
-              is invisible at the surface-architecture level. The
-              hypothesis becomes consequential only if longitudinal
-              evidence shows that maintaining useful control materially
-              limits independence, cost, performance, or scalability.
+              Technical diversity may produce limited practical independence
+              if multiple architectures remain reliant on the same difficult
+              longitudinal capability.
             </p>
 
           </div>
@@ -1722,14 +2037,14 @@
           </h3>
 
           <p>
-            The architectures solve neural access differently. The Lens
-            asks what must remain true after deployment.
+            The interfaces differ in access mechanism, signal acquisition,
+            channel density, procedure, and decoder characteristics.
           </p>
 
           <ul class="mini-list">
 
             <li>
-              Endovascular neural access
+              Endovascular access
             </li>
 
             <li>
@@ -1737,15 +2052,15 @@
             </li>
 
             <li>
-              Alternative cortical interface architectures
+              Alternative cortical interfaces
             </li>
 
             <li>
-              Signal acquisition and decoding
+              Decoder architecture
             </li>
 
             <li>
-              Longitudinal usability
+              Longitudinal operation
             </li>
 
           </ul>
@@ -1758,10 +2073,11 @@
 
             <br />
 
-            Specialist interventions per user;
+            Intervention frequency;
             recalibration frequency;
-            performance degradation between interventions;
-            restoration time; independent-use rate.
+            performance drift;
+            restoration time;
+            independent-use rate.
 
           </div>
 
@@ -1791,15 +2107,15 @@
         </div>
 
         <span class="status">
-          Pass · strong preliminary
+          Strong preliminary
         </span>
 
       </div>
 
 
       <div class="test-question">
-        When radically different automation architectures encounter
-        reality outside the nominal workflow, what must they recover from?
+        Do different automation architectures actually diversify reliance
+        on the warehouse's recovery capability?
       </div>
 
 
@@ -1814,29 +2130,24 @@
             </div>
 
             <h3>
-              Exception handling
+              Exception recovery may be the shared layer
             </h3>
 
             <p>
-              Mobile robots, fixed robotic picking systems, and human
-              picking with software assistance place automation in
-              different parts of the warehouse workflow. But all must
-              maintain order-processing flow when inventory, routes,
-              objects, equipment, or human activity depart from the
-              expected state.
+              Mobile robots, fixed robotic systems, and software-assisted
+              human picking use different mechanisms. All nevertheless have
+              to recover when inventory, equipment, routes, objects, or human
+              activity depart from the nominal state.
             </p>
 
             <div class="evidence-card">
 
               <strong>
-                Candidate dependency:
+                Candidate shared reliance:
               </strong>
 
-              <br />
-
-              Recovering from deviations without requiring human
-              intervention at a rate that materially limits throughput,
-              reliability, or scalability.
+              Access to sufficient recovery capacity when the expected
+              operating state breaks down.
 
             </div>
 
@@ -1850,9 +2161,9 @@
             </strong>
 
             <p>
-              Exception handling is not automatically a bottleneck.
-              A high exception count may be operationally irrelevant if
-              recovery is fast, autonomous, and cheap.
+              Different systems may call on entirely different recovery
+              resources. A shared category is not enough; the actual
+              dependency pool must be compared.
             </p>
 
           </div>
@@ -1861,15 +2172,14 @@
           <div class="conclusion">
 
             <strong>
-              Conclusion
+              Implication
             </strong>
 
             <p>
-              The Lens changes the comparison from nominal automation
-              performance to the cost of leaving the nominal state.
-              The candidate becomes a bottleneck only when intervention
-              frequency, recovery time, or resulting downtime materially
-              constrains useful warehouse output.
+              Automation choices provide stronger independence when their
+              recovery pathways rely on materially different capabilities
+              rather than competing for the same scarce human or operational
+              capacity.
             </p>
 
           </div>
@@ -1884,30 +2194,30 @@
           </h3>
 
           <p>
-            Automation can be mobile, fixed, integrated, or centered on
-            human execution with software assistance.
+            The systems differ in mobility, task allocation, physical
+            execution, coordination, and human participation.
           </p>
 
           <ul class="mini-list">
 
             <li>
-              Autonomous mobile robots
+              Autonomous mobile systems
             </li>
 
             <li>
-              Fixed / integrated robotic picking
+              Fixed robotic picking
             </li>
 
             <li>
-              Human picking with software assistance
+              Human picking with software
             </li>
 
             <li>
-              Fleet and workflow coordination
+              Fleet coordination
             </li>
 
             <li>
-              Human intervention and recovery
+              Recovery workflow
             </li>
 
           </ul>
@@ -1920,11 +2230,12 @@
 
             <br />
 
-            Human interventions per 1,000 tasks;
-            mean exception-resolution time;
+            Intervention rate;
+            recovery time;
             autonomous-resolution rate;
-            downtime; manual takeover rate;
-            intervention burden as scale increases.
+            takeover burden;
+            lost throughput;
+            recovery-capacity utilisation.
 
           </div>
 
@@ -1954,16 +2265,15 @@
         </div>
 
         <span class="status">
-          Pass · preliminary
+          Preliminary
         </span>
 
       </div>
 
 
       <div class="test-question">
-        Can physically different treatment mechanisms be compared through
-        the condition required to keep producing acceptable water when
-        the input changes?
+        Can technically different treatment mechanisms provide genuine
+        operational independence when feed conditions change?
       </div>
 
 
@@ -1978,28 +2288,25 @@
             </div>
 
             <h3>
-              Maintaining useful throughput under changing inputs
+              Input sensitivity may reveal shared reliance
             </h3>
 
             <p>
-              Membranes, thermal processes, and adsorption systems use
-              fundamentally different physical mechanisms. Yet each must
-              translate variable feed water into treated water that
-              remains within the required specification at useful
-              throughput.
+              Membrane, thermal, and adsorption processes operate through
+              different physical mechanisms. The higher-level question is
+              whether acceptable output under changing feed conditions
+              depends on the same scarce resources, maintenance capability,
+              or recovery path.
             </p>
 
             <div class="evidence-card">
 
               <strong>
-                Candidate dependency:
+                Candidate shared reliance:
               </strong>
 
-              <br />
-
-              Maintaining acceptable water quality and useful output as
-              feed conditions vary, without an unsustainable increase in
-              energy, material consumption, or maintenance.
+              Maintaining required output under adverse input conditions
+              without disproportionate operating or recovery burden.
 
             </div>
 
@@ -2013,10 +2320,9 @@
             </strong>
 
             <p>
-              Fouling, scaling, saturation, and energy demand are
-              technology-specific mechanisms. The Lens should not erase
-              those differences; it should test whether their operational
-              consequences become comparable at a higher level.
+              Different mechanisms can experience different forms of
+              fouling, scaling, saturation, energy demand, or maintenance.
+              Similar consequences do not establish identical reliance.
             </p>
 
           </div>
@@ -2025,14 +2331,13 @@
           <div class="conclusion">
 
             <strong>
-              Conclusion
+              Implication
             </strong>
 
             <p>
-              The useful comparison is not simply which mechanism removes
-              a contaminant best under favorable conditions, but how much
-              useful output deteriorates—or operating burden rises—when
-              the input becomes less favorable.
+              Genuine independence depends on whether the treatment options
+              draw on meaningfully different resource, maintenance, and
+              recovery pathways when conditions deteriorate.
             </p>
 
           </div>
@@ -2047,30 +2352,30 @@
           </h3>
 
           <p>
-            The mechanisms differ radically. The shared question concerns
-            sustained treatment performance.
+            The mechanisms, process conditions, resource profiles, and
+            maintenance modes differ materially.
           </p>
 
           <ul class="mini-list">
 
             <li>
-              Membrane filtration
+              Membrane processes
             </li>
 
             <li>
-              Thermal treatment
+              Thermal processes
             </li>
 
             <li>
-              Adsorption-based treatment
+              Adsorption
             </li>
 
             <li>
-              Changing feed composition
+              Variable feed composition
             </li>
 
             <li>
-              Intervention and resource burden
+              Recovery and maintenance
             </li>
 
           </ul>
@@ -2083,11 +2388,10 @@
 
             <br />
 
-            Treated-water quality;
-            useful volume per unit time;
-            throughput decline;
-            energy per acceptable output;
-            material consumption;
+            Output quality;
+            throughput;
+            resource per useful output;
+            sensitivity to feed variation;
             intervention frequency;
             recovery time.
 
@@ -2105,7 +2409,7 @@
 
 
 <!-- ==========================================================
-     EVIDENCE STANDARD
+     EVIDENCE
      ========================================================== -->
 
 <section
@@ -2121,12 +2425,12 @@
       </div>
 
       <h2>
-        Keep the inference visible.
+        Keep the reasoning auditable.
       </h2>
 
       <p>
-        The site separates what the literature establishes from what the
-        Lens infers and from what remains unresolved.
+        Reliance Lens distinguishes what is observed about an approach
+        from what is inferred about coupling and what remains untested.
       </p>
 
     </div>
@@ -2137,12 +2441,12 @@
       <div class="standard-card">
 
         <h3>
-          Claim
+          Observation
         </h3>
 
         <p>
-          What an external source establishes about the technology,
-          operating environment, performance, or known constraint.
+          What is known or explicitly supplied about an approach,
+          its operating conditions, resources, processes, and support.
         </p>
 
       </div>
@@ -2151,12 +2455,12 @@
       <div class="standard-card">
 
         <h3>
-          Inference
+          Shared reliance
         </h3>
 
         <p>
-          What the Lens proposes by comparing different approaches at
-          the level of shared function and dependency.
+          A condition, capability, resource, or recovery path that appears
+          across multiple approaches.
         </p>
 
       </div>
@@ -2165,12 +2469,12 @@
       <div class="standard-card">
 
         <h3>
-          Uncertainty
+          Independence
         </h3>
 
         <p>
-          What has not yet been demonstrated—including whether the
-          candidate dependency actually becomes a bottleneck.
+          Whether the approaches actually separate exposure when that
+          shared condition is stressed, disrupted, scarce, or changed.
         </p>
 
       </div>
@@ -2197,17 +2501,18 @@
       </div>
 
       <h2>
-        Don't ask what all technologies have in common.
+        Different technologies can still rely on the same thing.
       </h2>
 
       <p>
-        Ask at what level they become meaningfully comparable—and then
-        make the comparison vulnerable to evidence that could prove it
-        wrong.
+        The important question is not whether systems look different.
+        It is whether their operational reliance actually separates.
+        Technical diversity creates meaningful resilience only when the
+        underlying exposure becomes meaningfully independent.
       </p>
 
       <div class="final-formula">
-        Shared dependency → Does it actually constrain anything?
+        Technical diversity → Shared reliance → Coupling → Genuine independence?
       </div>
 
     </div>
@@ -2486,11 +2791,10 @@
         Evidence boundary.
       </strong>
 
-      These sources support the domain-level context and technical
-      observations. They do not establish that the candidate dependencies
-      identified here are universal or dominant bottlenecks. Those are
-      analytical hypotheses generated by the Lens and remain open to
-      longitudinal, comparative testing.
+      These sources support domain-level technical and operational
+      observations. The Reliance Lens analysis is a comparative framework;
+      the convergence and independence judgments remain hypotheses unless
+      supported by direct comparative evidence.
 
     </div>
 
@@ -2502,11 +2806,13 @@
 <footer>
 
   <div class="wrap">
-    Dependency Lens · A comparative method for testing shared dependencies
-    without prematurely calling them bottlenecks.
+    Reliance Lens · Different technologies. Shared reliance. Genuine independence?
   </div>
 
 </footer>
+
+
+</main>
 
 
 <script>
@@ -2515,21 +2821,24 @@
    STATE
    ============================================================ */
 
-let technologies = [
+let approaches = [
 
   {
     name: "",
-    description: ""
+    description: "",
+    reliance: ""
   },
 
   {
     name: "",
-    description: ""
+    description: "",
+    reliance: ""
   },
 
   {
     name: "",
-    description: ""
+    description: "",
+    reliance: ""
   }
 
 ];
@@ -2537,7 +2846,7 @@ let technologies = [
 
 let candidates = [];
 let selectedCandidate = 0;
-let lastAnalysisSignature = "";
+let hasRun = false;
 
 
 /* ============================================================
@@ -2583,7 +2892,6 @@ function lower(value) {
 function escapeHtml(value) {
 
   return String(value ?? "")
-
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
@@ -2635,7 +2943,7 @@ function countMatches(
 
 function joinNames(names) {
 
-  if (names.length === 0) {
+  if (!names.length) {
     return "the approaches";
   }
 
@@ -2653,69 +2961,86 @@ function joinNames(names) {
 
 
 /* ============================================================
-   INPUT PROMPTS
+   APPROACH PROMPTS
    ============================================================ */
 
 const prompts = [
 
   {
     name:
-      "e.g. incumbent system",
+      "e.g. established system",
 
-    description:
-      "Describe the mechanism, architecture, or operating model."
+    difference:
+      "Describe the mechanism, architecture, or operating model.",
+
+    reliance:
+      "What does this approach rely on to operate successfully?"
   },
 
   {
     name:
-      "e.g. alternative architecture",
+      "e.g. alternative system",
 
-    description:
-      "State the characteristic that makes this approach materially different."
+    difference:
+      "State what materially distinguishes this approach.",
+
+    reliance:
+      "What condition, capability, resource, or support does it require?"
   },
 
   {
     name:
-      "e.g. emerging approach",
+      "e.g. emerging system",
 
-    description:
-      "Describe the main technical or operational distinction."
+    difference:
+      "Describe the technical or operational distinction.",
+
+    reliance:
+      "What must remain available or stable for it to work?"
   },
 
   {
     name:
-      "e.g. current workflow",
+      "e.g. incumbent process",
 
-    description:
-      "Describe how this option differs from the others."
+    difference:
+      "Describe how this approach differs from the others.",
+
+    reliance:
+      "What surrounding capability does routine use depend on?"
   },
 
   {
     name:
-      "e.g. proposed system",
+      "e.g. proposed architecture",
 
-    description:
-      "Identify the feature that separates this approach."
+    difference:
+      "Identify the characteristic that separates this approach.",
+
+    reliance:
+      "What could this approach still be reliant on?"
   }
 
 ];
 
 
 /* ============================================================
-   RENDER INPUTS
+   RENDER APPROACHES
    ============================================================ */
 
-function renderTechnologies() {
+function renderApproaches() {
 
   const container =
-    document.getElementById("technologies");
+    document.getElementById(
+      "approaches"
+    );
 
 
   container.innerHTML = "";
 
 
-  technologies.forEach(
-    (technology, index) => {
+  approaches.forEach(
+    (approach, index) => {
 
       const prompt =
         prompts[
@@ -2728,24 +3053,24 @@ function renderTechnologies() {
 
 
       div.className =
-        "technology";
+        "approach";
 
 
       div.innerHTML = `
 
-        <div class="technology-top">
+        <div class="approach-top">
 
           <div class="number">
             APPROACH ${index + 1}
           </div>
 
           ${
-            technologies.length > 2
+            approaches.length > 2
               ? `
                 <button
                   type="button"
                   class="remove"
-                  onclick="removeTechnology(${index})">
+                  onclick="removeApproach(${index})">
                   Remove
                 </button>
               `
@@ -2767,8 +3092,12 @@ function renderTechnologies() {
               type="text"
               data-index="${index}"
               data-field="name"
-              value="${escapeHtml(technology.name)}"
-              placeholder="${escapeHtml(prompt.name)}"
+              value="${escapeHtml(
+                approach.name
+              )}"
+              placeholder="${escapeHtml(
+                prompt.name
+              )}"
             />
 
           </div>
@@ -2784,10 +3113,41 @@ function renderTechnologies() {
               type="text"
               data-index="${index}"
               data-field="description"
-              value="${escapeHtml(technology.description)}"
-              placeholder="${escapeHtml(prompt.description)}"
+              value="${escapeHtml(
+                approach.description
+              )}"
+              placeholder="${escapeHtml(
+                prompt.difference
+              )}"
             />
 
+          </div>
+
+        </div>
+
+
+        <div class="reliance-input">
+
+          <label>
+            What does it rely on?
+          </label>
+
+          <input
+            type="text"
+            data-index="${index}"
+            data-field="reliance"
+            value="${escapeHtml(
+              approach.reliance
+            )}"
+            placeholder="${escapeHtml(
+              prompt.reliance
+            )}"
+          />
+
+          <div class="field-note">
+            Name the specific operating condition, capability, resource,
+            infrastructure, process, specialist function, or recovery
+            pathway—not simply “reliability.”
           </div>
 
         </div>
@@ -2821,18 +3181,11 @@ function renderTechnologies() {
             event.target.dataset.field;
 
 
-          technologies[index][field] =
+          approaches[index][field] =
             event.target.value;
 
 
-          if (
-            lastAnalysisSignature
-          ) {
-
-            runStatus.textContent =
-              "Inputs changed · run the comparison again";
-
-          }
+          markDirty();
 
         }
       );
@@ -2842,26 +3195,47 @@ function renderTechnologies() {
 }
 
 
-function addTechnology() {
+function addApproach() {
 
-  technologies.push({
+  approaches.push({
 
     name: "",
 
-    description: ""
+    description: "",
+
+    reliance: ""
 
   });
 
 
-  renderTechnologies();
+  renderApproaches();
+
+  markDirty();
+
+
+  const inputs =
+    document.querySelectorAll(
+      '#approaches input[data-field="name"]'
+    );
+
+
+  const last =
+    inputs[
+      inputs.length - 1
+    ];
+
+
+  if (last) {
+    last.focus();
+  }
 
 }
 
 
-function removeTechnology(index) {
+function removeApproach(index) {
 
   if (
-    technologies.length <= 2
+    approaches.length <= 2
   ) {
 
     return;
@@ -2869,7 +3243,7 @@ function removeTechnology(index) {
   }
 
 
-  technologies.splice(
+  approaches.splice(
     index,
     1
   );
@@ -2879,20 +3253,35 @@ function removeTechnology(index) {
     0;
 
 
-  renderTechnologies();
+  renderApproaches();
 
-
-  runStatus.textContent =
-    "Approach removed · run the comparison again";
+  markDirty();
 
 }
 
 
 /* ============================================================
-   DEPENDENCY PATTERNS
+   DIRTY STATE
    ============================================================ */
 
-const dependencyPatterns = [
+function markDirty() {
+
+  if (!hasRun) {
+    return;
+  }
+
+
+  runStatus.textContent =
+    "Inputs changed · run the comparison again";
+
+}
+
+
+/* ============================================================
+   RELIANCE PATTERNS
+   ============================================================ */
+
+const patterns = [
 
   {
 
@@ -2916,30 +3305,28 @@ const dependencyPatterns = [
       "monitor",
       "monitoring",
       "state",
+      "control",
       "usable",
       "continuous",
       "reliable",
       "reliability",
+      "degradation",
       "long-term",
       "longitudinal",
-      "degradation",
-      "control"
+      "availability"
     ],
 
     text:
-      "The approaches may depend on preserving a sufficiently stable operating state so that the required real-world function remains achievable after deployment.",
+      "Multiple approaches may rely on maintaining a sufficiently stable operating state for the intended real-world function to continue.",
 
-    why:
-      "The candidate becomes stronger when the inputs point toward stability, degradation, calibration, monitoring, signal quality, control, or performance drift.",
-
-    exposure:
-      "Look for deterioration over time followed by recalibration, compensation, maintenance, recovery, or loss of useful performance.",
+    implication:
+      "Technical differences may provide limited independence if sustaining operation still depends on the same underlying maintenance or stabilisation capability.",
 
     support:
-      "Track performance over time and after meaningful state changes. Look for recurring degradation that requires intervention to restore the required function.",
+      "Compare performance trajectories, maintenance requirements, recalibration, intervention, and recovery across the approaches under meaningful changes in operating state.",
 
     falsifier:
-      "The hypothesis weakens if the approaches maintain the required function over time without meaningful recurring intervention."
+      "The hypothesis weakens if the approaches require materially different maintenance or stabilisation capabilities and respond differently to comparable operating changes."
 
   },
 
@@ -2950,7 +3337,7 @@ const dependencyPatterns = [
       "variation",
 
     title:
-      "Robustness to changing conditions",
+      "Absorbing changing operating conditions",
 
     keywords: [
       "variable",
@@ -2969,28 +3356,24 @@ const dependencyPatterns = [
       "noise",
       "load",
       "workload",
-      "nonideal",
-      "non-ideal",
       "stress",
-      "stressful",
-      "edge case",
-      "unexpected"
+      "unexpected",
+      "edge",
+      "nonideal",
+      "non-ideal"
     ],
 
     text:
-      "The approaches may depend on absorbing variation in inputs, environment, workload, users, materials, or other conditions without losing the required real-world function.",
+      "Multiple approaches may rely on absorbing the same class of changing inputs or environmental conditions without unacceptable loss of function.",
 
-    why:
-      "This becomes stronger when the problem or approach descriptions emphasize variability, uncertainty, changing inputs, environmental conditions, workload, or non-ideal operating states.",
-
-    exposure:
-      "The relevant signal is a measurable relationship between worsening conditions and declining performance, rising burden, or increased recovery requirements.",
+    implication:
+      "Technological diversity may not create much independence if each approach remains sensitive to the same external condition.",
 
     support:
-      "Deliberately vary the relevant operating condition and measure how the required function changes as conditions become less favorable.",
+      "Apply comparable changes in the relevant operating condition and compare degradation, recovery, resource use, and required support.",
 
     falsifier:
-      "The hypothesis weakens if substantial variation produces little meaningful change in performance, burden, or recovery requirements."
+      "The hypothesis weakens if the approaches respond materially differently to the same disturbance or rely on different mechanisms for absorbing it."
 
   },
 
@@ -3001,7 +3384,7 @@ const dependencyPatterns = [
       "intervention",
 
     title:
-      "Recovering without disproportionate intervention",
+      "Access to recovery or specialist capacity",
 
     keywords: [
       "human",
@@ -3025,23 +3408,21 @@ const dependencyPatterns = [
       "troubleshooting",
       "repair",
       "supervision",
-      "oversight"
+      "oversight",
+      "escalation"
     ],
 
     text:
-      "The approaches may depend on recovering from deviations without transferring too much work to people, specialists, operators, maintenance systems, or supporting infrastructure.",
+      "Multiple approaches may rely on access to a limited human, specialist, maintenance, or recovery capability when the nominal operating state is lost.",
 
-    why:
-      "This candidate rises when the actual comparison contains intervention, exceptions, manual work, specialist support, maintenance, takeover, supervision, or recovery requirements.",
-
-    exposure:
-      "The important signal is what happens after the system leaves its nominal state: who intervenes, how often, how long recovery takes, and what useful output is lost.",
+    implication:
+      "Apparently different systems may remain coupled when they draw on the same scarce recovery pool.",
 
     support:
-      "Measure exception frequency, intervention frequency, intervention duration, recovery time, and useful output lost during intervention.",
+      "Measure who intervenes, how often, how long recovery takes, what capacity is consumed, and whether demand for that capability overlaps across approaches.",
 
     falsifier:
-      "The hypothesis weakens if useful deployment reaches meaningful scale with low intervention frequency and short recovery times."
+      "The hypothesis weakens if the approaches use materially different recovery capabilities or can scale without competing for the same support capacity."
 
   },
 
@@ -3052,7 +3433,7 @@ const dependencyPatterns = [
       "resources",
 
     title:
-      "Sustaining performance within resource limits",
+      "Access to the same scarce resource or capacity",
 
     keywords: [
       "energy",
@@ -3071,27 +3452,27 @@ const dependencyPatterns = [
       "scalability",
       "capital",
       "infrastructure",
-      "maintenance",
       "economic",
       "economics",
       "scarce",
-      "capacity"
+      "capacity",
+      "supply",
+      "supplier",
+      "specialized",
+      "specialist"
     ],
 
     text:
-      "The approaches may depend on maintaining the required function without an escalating burden of energy, materials, compute, labor, infrastructure, maintenance, or specialist support.",
+      "Multiple approaches may rely on access to the same constrained resource, capacity, infrastructure, or specialist capability.",
 
-    why:
-      "This candidate becomes stronger when the inputs emphasize resources, cost, staffing, infrastructure, energy, materials, compute, or scarce operational capacity.",
-
-    exposure:
-      "The critical signal is whether maintaining the required function becomes disproportionately more resource-intensive as demands or deployment scale increase.",
+    implication:
+      "Changing technology may not materially reduce exposure when all alternatives draw on the same constrained upstream resource.",
 
     support:
-      "Measure recurring resources per unit of useful function and examine whether that burden rises disproportionately under more demanding conditions or greater scale.",
+      "Compare resource requirements, supply dependence, capacity utilisation, marginal burden, and behaviour under scarcity.",
 
     falsifier:
-      "The hypothesis weakens if the required function can be maintained without materially increasing recurring resource burden as demand increases."
+      "The hypothesis weakens if the approaches use materially different resource pools that remain available under different stress conditions."
 
   },
 
@@ -3102,7 +3483,7 @@ const dependencyPatterns = [
       "workflow",
 
     title:
-      "Fit with the surrounding workflow",
+      "Dependence on the same surrounding process",
 
     keywords: [
       "workflow",
@@ -3121,25 +3502,22 @@ const dependencyPatterns = [
       "operational",
       "deployment",
       "adoption",
-      "routine",
       "procedure",
-      "protocol"
+      "protocol",
+      "schedule"
     ],
 
     text:
-      "The approaches may depend on a surrounding workflow that can absorb the technology without creating unsustainable handoffs, training requirements, coordination work, or process disruption.",
+      "Multiple approaches may depend on the same surrounding workflow, integration layer, staffing model, procedure, or coordination capability.",
 
-    why:
-      "This rises when the problem or approach descriptions emphasize implementation, workflow, staffing, coordination, training, handoffs, software integration, procedures, or routine use.",
-
-    exposure:
-      "The relevant signal is added process complexity: additional steps, handoffs, training, staffing, coordination, or workflow exceptions required to make the technology usable.",
+    implication:
+      "Substituting one technical solution for another may leave the surrounding operational dependency almost unchanged.",
 
     support:
-      "Compare additional workflow steps, handoffs, training requirements, staffing demands, coordination tasks, and process exceptions introduced by each approach.",
+      "Map the workflow, staffing, coordination, integration, training, and process requirements of each approach and identify shared upstream capabilities.",
 
     falsifier:
-      "The hypothesis weakens if an approach becomes routine without creating the additional workflow burden predicted by the comparison."
+      "The hypothesis weakens if the approaches can operate through materially different workflows, staffing models, or coordination structures."
 
   }
 
@@ -3147,149 +3525,7 @@ const dependencyPatterns = [
 
 
 /* ============================================================
-   FUNCTION GENERATOR
-   ============================================================ */
-
-function inferFunction(
-  problem,
-  populated
-) {
-
-  const problemText =
-    clean(problem);
-
-
-  const combined =
-    lower(
-      [
-        problemText,
-        ...populated.map(
-          technology =>
-            `${technology.name} ${technology.description}`
-        )
-      ].join(" ")
-    );
-
-
-  if (
-    containsAny(
-      combined,
-      [
-        "monitor",
-        "detect",
-        "diagnos",
-        "signal",
-        "control",
-        "decode",
-        "measure"
-      ]
-    )
-  ) {
-
-    return `Across the approaches, the shared function appears to be maintaining a sufficiently trustworthy sensing, interpretation, or control process to produce the required real-world result. The technical mechanisms may differ, but each must turn uncertain or changing inputs into an action or output that remains fit for purpose.`;
-
-  }
-
-
-  if (
-    containsAny(
-      combined,
-      [
-        "move",
-        "pick",
-        "transport",
-        "route",
-        "warehouse",
-        "manufactur",
-        "robot",
-        "automation",
-        "production"
-      ]
-    )
-  ) {
-
-    return `Across the approaches, the shared function appears to be completing the required operational task while maintaining enough continuity, accuracy, and recovery capability for the surrounding system to keep functioning.`;
-
-  }
-
-
-  if (
-    containsAny(
-      combined,
-      [
-        "treat",
-        "remove",
-        "purif",
-        "filter",
-        "water",
-        "contamin",
-        "separate"
-      ]
-    )
-  ) {
-
-    return `Across the approaches, the shared function appears to be transforming a variable input into an output that remains within the required operating specification, while keeping the process sustainable under real conditions.`;
-
-  }
-
-
-  if (
-    containsAny(
-      combined,
-      [
-        "power",
-        "energy",
-        "electric",
-        "grid",
-        "storage",
-        "generation",
-        "load"
-      ]
-    )
-  ) {
-
-    return `Across the approaches, the shared function appears to be delivering the required service continuously enough and predictably enough for the surrounding system to rely on it under actual operating conditions.`;
-
-  }
-
-
-  if (
-    containsAny(
-      combined,
-      [
-        "safety",
-        "secure",
-        "security",
-        "hazard",
-        "risk",
-        "failure",
-        "critical",
-        "mission"
-      ]
-    )
-  ) {
-
-    return `Across the approaches, the shared function appears to be delivering the required result while keeping failure probability, exposure, and recovery requirements within an acceptable operating envelope.`;
-
-  }
-
-
-  if (
-    problemText
-  ) {
-
-    return `Regardless of their technical differences, the approaches must all convert their respective inputs and mechanisms into the real-world result described by the problem. The meaningful common function is therefore not the implementation itself, but the ability to produce that result reliably under the conditions in which the system will actually operate.`;
-
-  }
-
-
-  return `The approaches must ultimately produce a usable real-world result rather than merely demonstrate technical capability. The comparison therefore focuses on the condition each approach must preserve after deployment.`;
-
-}
-
-
-/* ============================================================
-   SCORE CANDIDATES
+   SCORE PATTERNS
    ============================================================ */
 
 function scorePattern(
@@ -3300,93 +3536,152 @@ function scorePattern(
   evidence
 ) {
 
-  const technologyText =
-    populated
-      .map(
-        technology =>
-          `${technology.name} ${technology.description}`
-      )
-      .join(" ");
-
-
-  const combined =
+  const allText =
     lower(
-      `${problem} ${technologyText}`
+      [
+        problem,
+        ...populated.map(
+          approach =>
+            [
+              approach.name,
+              approach.description,
+              approach.reliance
+            ].join(" ")
+        )
+      ].join(" ")
     );
 
 
   let score =
     countMatches(
-      combined,
+      allText,
       pattern.keywords
     );
 
 
   /*
-   The comparison question changes what
-   counts as analytically important.
+   Explicit reliance statements matter most.
   */
 
-  const questionBoosts = {
+  populated.forEach(
+    approach => {
 
-    dependency: {
+      score +=
+        countMatches(
+          lower(
+            approach.reliance
+          ),
+          pattern.keywords
+        ) * 4;
+
+    }
+  );
+
+
+  /*
+   Reward recurrence across approaches.
+  */
+
+  const approachHits =
+    populated.filter(
+      approach =>
+        containsAny(
+          [
+            approach.description,
+            approach.reliance
+          ].join(" "),
+          pattern.keywords
+        )
+    ).length;
+
+
+  score +=
+    approachHits * 2;
+
+
+  if (
+    approachHits >= 2
+  ) {
+
+    score += 4;
+
+  }
+
+
+  if (
+    approachHits ===
+    populated.length
+  ) {
+
+    score += 4;
+
+  }
+
+
+  /*
+   Question weighting.
+  */
+
+  const questionBoost = {
+
+    independence: {
       state: 1,
-      variation: 1,
-      intervention: 1,
-      resources: 1,
-      workflow: 1
+      variation: 2,
+      intervention: 4,
+      resources: 4,
+      workflow: 3
     },
 
-    risk: {
+    hidden: {
       state: 2,
       variation: 3,
-      intervention: 3,
-      resources: 1,
-      workflow: 1
+      intervention: 4,
+      resources: 4,
+      workflow: 3
     },
 
     scale: {
       state: 1,
       variation: 3,
       intervention: 3,
-      resources: 4,
-      workflow: 2
+      resources: 5,
+      workflow: 3
     },
 
     implementation: {
       state: 1,
       variation: 1,
-      intervention: 3,
+      intervention: 4,
       resources: 2,
-      workflow: 4
+      workflow: 5
     }
 
   };
 
 
   score +=
-    questionBoosts[
+    questionBoost[
       question
     ][pattern.key] || 0;
 
 
   /*
-   The evidence emphasis changes the test.
+   Evidence weighting.
   */
 
-  const evidenceBoosts = {
+  const evidenceBoost = {
 
     operations: {
       state: 2,
       variation: 2,
-      intervention: 4,
-      resources: 2,
+      intervention: 5,
+      resources: 3,
       workflow: 3
     },
 
     performance: {
-      state: 4,
-      variation: 3,
+      state: 5,
+      variation: 4,
       intervention: 1,
       resources: 1,
       workflow: 1
@@ -3397,7 +3692,7 @@ function scorePattern(
       variation: 1,
       intervention: 4,
       resources: 1,
-      workflow: 4
+      workflow: 5
     },
 
     economics: {
@@ -3412,56 +3707,16 @@ function scorePattern(
 
 
   score +=
-    evidenceBoosts[
+    evidenceBoost[
       evidence
     ][pattern.key] || 0;
 
 
-  /*
-   Real approach diversity matters.
-   If several different approaches contain signals
-   associated with the same dependency, increase it.
-  */
-
-  const approachHits =
-    populated.filter(
-      technology =>
-        containsAny(
-          `${technology.name} ${technology.description}`,
-          pattern.keywords
-        )
-    ).length;
-
-
-  score +=
-    approachHits * 2;
-
-
-  /*
-   A shared candidate is stronger when the same
-   language appears across multiple approaches.
-  */
-
-  if (
-    approachHits >= 2
-  ) {
-
-    score += 3;
-
-  }
-
-
-  if (
-    approachHits ===
-    populated.length
-  ) {
-
-    score += 3;
-
-  }
-
-
-  return score;
+  return {
+    pattern,
+    score,
+    approachHits
+  };
 
 }
 
@@ -3487,56 +3742,186 @@ function buildCandidates() {
 
 
   const populated =
-    technologies.filter(
-      technology =>
-        clean(technology.name) ||
-        clean(technology.description)
+    approaches.filter(
+      approach =>
+        clean(approach.name) ||
+        clean(approach.description) ||
+        clean(approach.reliance)
     );
 
 
-  const scored =
-    dependencyPatterns
-      .map(
-        pattern => ({
+  return patterns
 
-          pattern,
-
-          score:
-            scorePattern(
-              pattern,
-              problem,
-              populated,
-              question,
-              evidence
-            )
-
-        })
-      )
-      .sort(
-        (a, b) =>
-          b.score - a.score
-      );
-
-
-  /*
-   Preserve multiple competing explanations.
-  */
-
-  return scored
-    .slice(0, 3)
     .map(
-      item =>
-        item.pattern
-    );
+      pattern =>
+        scorePattern(
+          pattern,
+          problem,
+          populated,
+          question,
+          evidence
+        )
+    )
+
+    .sort(
+      (a, b) =>
+        b.score - a.score
+    )
+
+    .slice(0, 3);
 
 }
 
 
 /* ============================================================
-   RENDER SURFACE
+   FUNCTION
    ============================================================ */
 
-function renderSurface() {
+function inferFunction(
+  problem,
+  populated
+) {
+
+  const combined =
+    lower(
+      [
+        problem,
+        ...populated.map(
+          approach =>
+            [
+              approach.name,
+              approach.description,
+              approach.reliance
+            ].join(" ")
+        )
+      ].join(" ")
+    );
+
+
+  if (
+    containsAny(
+      combined,
+      [
+        "monitor",
+        "detect",
+        "diagnos",
+        "signal",
+        "decode",
+        "measure",
+        "control",
+        "sense"
+      ]
+    )
+  ) {
+
+    return (
+      "The common function appears to be converting uncertain or changing inputs into a sufficiently trustworthy sensing, interpretation, or control result for the real-world requirement to continue."
+    );
+
+  }
+
+
+  if (
+    containsAny(
+      combined,
+      [
+        "robot",
+        "warehouse",
+        "pick",
+        "move",
+        "transport",
+        "manufactur",
+        "production",
+        "automation"
+      ]
+    )
+  ) {
+
+    return (
+      "The common function appears to be completing the required operational task continuously enough for the surrounding system to depend on it, including when conditions depart from the nominal case."
+    );
+
+  }
+
+
+  if (
+    containsAny(
+      combined,
+      [
+        "water",
+        "treat",
+        "purif",
+        "remove",
+        "contamin",
+        "separate"
+      ]
+    )
+  ) {
+
+    return (
+      "The common function appears to be converting variable inputs into an output that remains within the required operating specification under real conditions."
+    );
+
+  }
+
+
+  if (
+    containsAny(
+      combined,
+      [
+        "energy",
+        "power",
+        "grid",
+        "storage",
+        "generation",
+        "load"
+      ]
+    )
+  ) {
+
+    return (
+      "The common function appears to be delivering a sufficiently continuous and predictable service for the surrounding system to rely on it during changing operating conditions."
+    );
+
+  }
+
+
+  if (
+    containsAny(
+      combined,
+      [
+        "safety",
+        "secure",
+        "security",
+        "hazard",
+        "critical",
+        "mission",
+        "failure"
+      ]
+    )
+  ) {
+
+    return (
+      "The common function appears to be delivering the required result while keeping failure, exposure, and recovery within the operating envelope required by the mission."
+    );
+
+  }
+
+
+  return (
+    `The common function is the real-world requirement described by the problem: "${clean(problem)}". The meaningful comparison is whether each approach can continue producing that result under the conditions in which it must actually operate.`
+  );
+
+}
+
+
+/* ============================================================
+   SURFACE
+   ============================================================ */
+
+function renderSurface(
+  populated
+) {
 
   const container =
     document.getElementById(
@@ -3547,16 +3932,8 @@ function renderSurface() {
   container.innerHTML = "";
 
 
-  const populated =
-    technologies.filter(
-      technology =>
-        clean(technology.name) ||
-        clean(technology.description)
-    );
-
-
   populated.forEach(
-    (technology, index) => {
+    (approach, index) => {
 
       const div =
         document.createElement("div");
@@ -3570,16 +3947,14 @@ function renderSurface() {
 
         <strong>
           ${escapeHtml(
-            clean(technology.name) ||
+            approach.name ||
             `Approach ${index + 1}`
           )}
         </strong>
 
         <p>
           ${escapeHtml(
-            clean(
-              technology.description
-            ) ||
+            approach.description ||
             "No technical distinction supplied."
           )}
         </p>
@@ -3596,7 +3971,167 @@ function renderSurface() {
 
 
 /* ============================================================
-   RENDER CANDIDATES
+   RELIANCE MAP
+   ============================================================ */
+
+function renderRelianceMap(
+  populated
+) {
+
+  const container =
+    document.getElementById(
+      "relianceMap"
+    );
+
+
+  container.innerHTML = "";
+
+
+  populated.forEach(
+    (approach, index) => {
+
+      const row =
+        document.createElement("div");
+
+
+      row.className =
+        "reliance-row";
+
+
+      row.innerHTML = `
+
+        <div class="reliance-name">
+          ${escapeHtml(
+            approach.name ||
+            `Approach ${index + 1}`
+          )}
+        </div>
+
+        <div class="reliance-detail">
+          ${escapeHtml(
+            approach.reliance ||
+            "No explicit reliance supplied."
+          )}
+        </div>
+
+      `;
+
+
+      container.appendChild(row);
+
+    }
+  );
+
+}
+
+
+/* ============================================================
+   SUMMARY
+   ============================================================ */
+
+function renderSummary(
+  populated
+) {
+
+  const container =
+    document.getElementById(
+      "summaryGrid"
+    );
+
+
+  const names =
+    populated.map(
+      approach =>
+        lower(
+          approach.name
+        )
+    );
+
+
+  const uniqueNames =
+    new Set(names);
+
+
+  const explicitReliance =
+    populated.filter(
+      approach =>
+        clean(
+          approach.reliance
+        )
+    ).length;
+
+
+  container.innerHTML = `
+
+    <div class="summary-card">
+
+      <div class="summary-label">
+        Technical differentiation
+      </div>
+
+      <strong>
+        ${
+          uniqueNames.size === populated.length
+            ? "Explicit"
+            : "Needs clarification"
+        }
+      </strong>
+
+      <p>
+        Based on the distinctions entered for each approach.
+      </p>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-label">
+        Explicit reliance coverage
+      </div>
+
+      <strong>
+        ${explicitReliance} / ${populated.length}
+      </strong>
+
+      <p>
+        Approaches for which a concrete reliance statement was supplied.
+      </p>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-label">
+        Primary decision question
+      </div>
+
+      <strong>
+        ${
+          questionInput.value === "independence"
+            ? "Genuine independence"
+            : questionInput.value === "hidden"
+            ? "Hidden shared reliance"
+            : questionInput.value === "scale"
+            ? "Scale dependence"
+            : "Implementation coupling"
+        }
+      </strong>
+
+      <p>
+        The Lens tests whether choosing differently changes operational reliance.
+      </p>
+
+    </div>
+
+  `;
+
+}
+
+
+/* ============================================================
+   CANDIDATES
    ============================================================ */
 
 function renderCandidates() {
@@ -3611,7 +4146,11 @@ function renderCandidates() {
 
 
   candidates.forEach(
-    (candidate, index) => {
+    (item, index) => {
+
+      const candidate =
+        item.pattern;
+
 
       const div =
         document.createElement("div");
@@ -3646,6 +4185,18 @@ function renderCandidates() {
           )}
         </p>
 
+        <div class="candidate-meta">
+          Input coverage:
+          ${item.approachHits} / ${
+            approaches.filter(
+              approach =>
+                clean(approach.name) ||
+                clean(approach.description) ||
+                clean(approach.reliance)
+            ).length
+          } approaches
+        </div>
+
       `;
 
 
@@ -3659,6 +4210,7 @@ function renderCandidates() {
 
           renderCandidates();
 
+          renderConvergence();
 
           renderSelectedCandidate();
 
@@ -3675,48 +4227,159 @@ function renderCandidates() {
 
 
 /* ============================================================
-   RENDER SELECTED CANDIDATE
+   CONVERGENCE
+   ============================================================ */
+
+function renderConvergence() {
+
+  const container =
+    document.getElementById(
+      "convergence"
+    );
+
+
+  const selected =
+    candidates[
+      selectedCandidate
+    ];
+
+
+  if (!selected) {
+
+    container.innerHTML = "";
+
+    return;
+
+  }
+
+
+  const populated =
+    approaches.filter(
+      approach =>
+        clean(approach.name) ||
+        clean(approach.description) ||
+        clean(approach.reliance)
+    );
+
+
+  const count =
+    selected.approachHits;
+
+
+  const ratio =
+    count /
+    populated.length;
+
+
+  let heading = "";
+  let body = "";
+
+
+  if (
+    ratio === 1
+  ) {
+
+    heading =
+      "Potential shared reliance across the whole set";
+
+
+    body =
+      `The selected pattern is represented across all ${populated.length} approaches. That means technical diversity has not yet demonstrated operational independence at this layer. The next question is whether those approaches depend on the same underlying capability, capacity, or recovery pathway—or merely share a broad label while drawing on different mechanisms.`;
+
+  }
+
+
+  else if (
+    ratio >= .67
+  ) {
+
+    heading =
+      "Partial reliance concentration";
+
+
+    body =
+      `The selected pattern appears across ${count} of ${populated.length} approaches. This is enough to justify investigation, but not enough to assume that the portfolio is coupled. The remaining differences need to be examined directly.`;
+
+  }
+
+
+  else {
+
+    heading =
+      "Some reliance separation is visible";
+
+
+    body =
+      `The selected pattern appears in ${count} of ${populated.length} approaches. That argues against full convergence on this particular condition, while leaving open the possibility of stronger coupling elsewhere.`;
+
+  }
+
+
+  container.innerHTML = `
+
+    <div class="convergence-label">
+      Current reading
+    </div>
+
+    <h4>
+      ${escapeHtml(heading)}
+    </h4>
+
+    <p>
+      ${escapeHtml(body)}
+    </p>
+
+  `;
+
+}
+
+
+/* ============================================================
+   SELECTED HYPOTHESIS
    ============================================================ */
 
 function renderSelectedCandidate() {
 
-  const candidate =
-    candidates[selectedCandidate];
+  const selected =
+    candidates[
+      selectedCandidate
+    ];
 
 
-  if (!candidate) {
+  if (!selected) {
     return;
   }
 
 
-  const problem =
-    clean(
-      problemInput.value
-    );
+  const candidate =
+    selected.pattern;
 
 
   const populated =
-    technologies.filter(
-      technology =>
-        clean(technology.name) ||
-        clean(technology.description)
+    approaches.filter(
+      approach =>
+        clean(approach.name) ||
+        clean(approach.description) ||
+        clean(approach.reliance)
     );
 
 
   const names =
     populated.map(
-      (technology, index) =>
-        clean(technology.name) ||
+      (approach, index) =>
+        clean(
+          approach.name
+        ) ||
         `Approach ${index + 1}`
     );
 
 
-  const question =
-    questionInput.value;
-
-
   const evidence =
     evidenceInput.value;
+
+
+  const question =
+    questionInput.value;
 
 
   document.getElementById(
@@ -3728,40 +4391,83 @@ function renderSelectedCandidate() {
   document.getElementById(
     "dependencyText"
   ).textContent =
-    `${candidate.text} The question being tested is whether this shared condition matters for the real-world problem described: ${problem || "the stated system requirement"}.`;
+    `${candidate.text} The current hypothesis is that this shared reliance may reduce the practical independence of ${joinNames(names)}.`;
 
 
   document.getElementById(
     "whyText"
   ).textContent =
-    `${candidate.why} The comparison currently emphasizes ${evidence === "operations"
-      ? "operational burden"
+    `${candidate.implication} The candidate currently appears across ${selected.approachHits} of ${populated.length} approaches, with the strongest weighting coming from the explicit reliance statements and the selected ${evidence === "operations"
+      ? "operational"
       : evidence === "performance"
-      ? "long-term performance"
+      ? "performance"
       : evidence === "workflow"
-      ? "workflow and implementation"
-      : "recurring economics"
-    } and asks ${question === "dependency"
-      ? "what all of the approaches must make work"
-      : question === "risk"
-      ? "what shared condition could create hidden risk"
-      : question === "scale"
-      ? "what could become limiting as deployment or use grows"
-      : "what could prevent an otherwise capable approach from becoming routine"
-    }.`;
+      ? "workflow"
+      : "economic"
+    } evidence emphasis.`;
+
+
+  let implication =
+    candidate.implication;
+
+
+  if (
+    question === "independence"
+  ) {
+
+    implication +=
+      " The practical decision is whether choosing another architecture would actually reduce exposure to the same underlying condition.";
+
+  }
+
+
+  if (
+    question === "hidden"
+  ) {
+
+    implication +=
+      " The practical decision is whether an apparently unrelated option remains coupled through a less visible upstream condition.";
+
+  }
+
+
+  if (
+    question === "scale"
+  ) {
+
+    implication +=
+      " The practical decision is whether the common reliance becomes harder to satisfy as deployment or demand expands.";
+
+  }
+
+
+  if (
+    question === "implementation"
+  ) {
+
+    implication +=
+      " The practical decision is whether multiple technically different options still depend on the same operational capability for routine adoption.";
+
+  }
 
 
   document.getElementById(
-    "exposureText"
+    "implicationText"
   ).textContent =
-    candidate.exposure;
+    implication;
 
 
   document.getElementById(
     "supportingEvidence"
   ).textContent =
-    candidate.support;
-
+    `${candidate.support} Focus especially on ${evidence === "operations"
+      ? "intervention, recovery, downtime, and operating burden"
+      : evidence === "performance"
+      ? "performance trajectories and degradation under changing conditions"
+      : evidence === "workflow"
+      ? "staffing, process steps, coordination, and integration"
+      : "recurring resource demand, capacity constraints, and marginal burden"
+    }.`;
 
   document.getElementById(
     "falsifier"
@@ -3784,19 +4490,18 @@ function runAnalysis() {
 
 
   const populated =
-    technologies.filter(
-      technology =>
-        clean(technology.name) ||
-        clean(technology.description)
+    approaches.filter(
+      approach =>
+        clean(approach.name) ||
+        clean(approach.description) ||
+        clean(approach.reliance)
     );
 
 
-  if (
-    !problem
-  ) {
+  if (!problem) {
 
     alert(
-      "Define the shared problem before running the comparison."
+      "Define the shared function before running the comparison."
     );
 
     problemInput.focus();
@@ -3819,9 +4524,74 @@ function runAnalysis() {
   }
 
 
+  const missingNames =
+    populated.filter(
+      approach =>
+        !clean(
+          approach.name
+        )
+    );
+
+
+  if (
+    missingNames.length
+  ) {
+
+    alert(
+      "Give each approach a name before running the comparison."
+    );
+
+    return;
+
+  }
+
+
+  const missingDifferences =
+    populated.filter(
+      approach =>
+        !clean(
+          approach.description
+        )
+    );
+
+
+  if (
+    missingDifferences.length
+  ) {
+
+    alert(
+      "Describe what makes each approach different before running the comparison."
+    );
+
+    return;
+
+  }
+
+
+  const missingReliance =
+    populated.filter(
+      approach =>
+        !clean(
+          approach.reliance
+        )
+    );
+
+
+  if (
+    missingReliance.length
+  ) {
+
+    alert(
+      "Describe what each approach relies on before running the comparison."
+    );
+
+    return;
+
+  }
+
+
   /*
-   Every new run starts fresh.
-   Candidate B can never become sticky.
+   Fresh run.
   */
 
   selectedCandidate =
@@ -3832,124 +4602,90 @@ function runAnalysis() {
     buildCandidates();
 
 
-  if (
-    candidates.length === 0
-  ) {
-
-    return;
-
-  }
+  renderSurface(
+    populated
+  );
 
 
-  const question =
-    questionInput.value;
+  renderSummary(
+    populated
+  );
 
 
-  const evidence =
-    evidenceInput.value;
+  renderRelianceMap(
+    populated
+  );
 
 
-  const functionText =
+  renderCandidates();
+
+
+  renderConvergence();
+
+
+  renderSelectedCandidate();
+
+
+  document.getElementById(
+    "functionText"
+  ).textContent =
     inferFunction(
       problem,
       populated
     );
 
 
-  const names =
-    populated.map(
-      (technology, index) =>
-        clean(technology.name) ||
-        `Approach ${index + 1}`
-    );
+  const questionText = {
+
+    independence:
+      "whether the different approaches actually provide independence",
+
+    hidden:
+      "where hidden shared reliance could remain",
+
+    scale:
+      "where reliance concentration could increase as deployment grows",
+
+    implementation:
+      "what shared reliance could undermine routine implementation"
+
+  };
 
 
-  /* ----------------------------------------------------------
-     RESULTS INTRO
-     ---------------------------------------------------------- */
+  const evidenceText = {
+
+    operations:
+      "operational burden",
+
+    performance:
+      "long-term performance",
+
+    workflow:
+      "workflow and implementation",
+
+    economics:
+      "recurring economics"
+
+  };
+
 
   document.getElementById(
     "resultIntro"
   ).textContent =
-    `The comparison is anchored to "${problem}". It asks ${question === "dependency"
-      ? "what all of the approaches must make work"
-      : question === "risk"
-      ? "what shared dependency could create hidden risk"
-      : question === "scale"
-      ? "what dependency could become limiting at scale"
-      : "what condition could prevent routine implementation"
-    }, with emphasis on ${evidence === "operations"
-      ? "operational burden"
-      : evidence === "performance"
-      ? "long-term performance"
-      : evidence === "workflow"
-      ? "workflow and implementation"
-      : "recurring economics"
-    }.`;
+    `The comparison starts from "${problem}" and tests ${questionText[questionInput.value]}, with emphasis on ${evidenceText[evidenceInput.value]}. The result is a structured hypothesis about operational reliance, not a declaration of system independence or dependence.`;
 
-
-  /* ----------------------------------------------------------
-     SURFACE
-     ---------------------------------------------------------- */
-
-  renderSurface();
-
-
-  /* ----------------------------------------------------------
-     FUNCTION
-     ---------------------------------------------------------- */
-
-  document.getElementById(
-    "functionText"
-  ).textContent =
-    functionText;
-
-
-  /* ----------------------------------------------------------
-     CANDIDATES
-     ---------------------------------------------------------- */
-
-  renderCandidates();
-
-
-  /* ----------------------------------------------------------
-     HYPOTHESIS
-     ---------------------------------------------------------- */
-
-  renderSelectedCandidate();
-
-
-  /* ----------------------------------------------------------
-     SHOW RESULTS
-     ---------------------------------------------------------- */
 
   results.style.display =
     "block";
 
 
-  lastAnalysisSignature =
-    JSON.stringify({
-
-      problem,
-
-      technologies:
-
-        populated,
-
-      question,
-
-      evidence
-
-    });
+  hasRun =
+    true;
 
 
   runStatus.textContent =
     "Comparison updated";
 
-
-  /*
-   Move to results after the DOM has painted.
-  */
 
   requestAnimationFrame(
     () => {
@@ -3966,51 +4702,24 @@ function runAnalysis() {
 
 
 /* ============================================================
-   INPUT CHANGE HANDLING
+   CHANGE MONITORING
    ============================================================ */
 
 problemInput.addEventListener(
   "input",
-  () => {
-
-    if (lastAnalysisSignature) {
-
-      runStatus.textContent =
-        "Inputs changed · run the comparison again";
-
-    }
-
-  }
+  markDirty
 );
 
 
 questionInput.addEventListener(
   "change",
-  () => {
-
-    if (lastAnalysisSignature) {
-
-      runStatus.textContent =
-        "Inputs changed · run the comparison again";
-
-    }
-
-  }
+  markDirty
 );
 
 
 evidenceInput.addEventListener(
   "change",
-  () => {
-
-    if (lastAnalysisSignature) {
-
-      runStatus.textContent =
-        "Inputs changed · run the comparison again";
-
-    }
-
-  }
+  markDirty
 );
 
 
@@ -4018,7 +4727,7 @@ evidenceInput.addEventListener(
    INITIALIZE
    ============================================================ */
 
-renderTechnologies();
+renderApproaches();
 
 </script>
 
