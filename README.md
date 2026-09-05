@@ -17,7 +17,7 @@ That creates a different question:
 
 Sometimes the important risk is not visible at the level where the technologies differ. It sits one level above them — in a shared dependency.
 
-**Dependency Lens** is a small analytical instrument for finding and testing those dependencies.
+**Dependency Lens** is a small analytical instrument for surfacing and testing those dependencies.
 
 ---
 
@@ -92,7 +92,7 @@ It is less useful when the question is:
 
 Two architectures can solve a problem differently while still being exposed to the same underlying condition.
 
-That creates a form of concentration that may be invisible in a conventional comparison.
+That creates a form of concentration that may be missed in a conventional comparison.
 
 The purpose of Dependency Lens is not to eliminate feature-level analysis.
 
@@ -174,7 +174,7 @@ A bottleneck is a dependency that becomes materially limiting.
 
 That distinction matters.
 
-Finding a shared dependency is only the beginning. The useful analytical question is whether that dependency actually constrains performance, implementation, economics, reliability, or scale.
+Surfacing a shared dependency is only the beginning. The useful analytical question is whether that dependency actually constrains performance, implementation, economics, reliability, or scale.
 
 The final step therefore remains empirical:
 
